@@ -1,0 +1,9 @@
+{
+  "01_basic": ["Project Falcon", "QX-7741", "35 percent", "Orbit dashboard", "120 staff", "March 2026", "Pune office", "December 2026"],
+  "02_table": ["Zentrix Corp", "Q3 2026", "Bengaluru Office", "48,213", "Mumbai Office", "39,870", "Delhi Office", "27,645", "16,050"],
+  "03_two_column": ["Orion Labs", "Mysuru", "42 researchers", "Helios", "Hubballi", "Delta 9", "Chennai", "3,400 customers", "Meera Rao"],
+  "04_slides": ["Nimbus Product Launch", "Team Kestrel", "1,250 units", "Hyderabad", "Arjun Mehta", "Priya Nair", "1,299", "Enterprise"],
+  "05_sheet": ["INV-5582", "Sparrow Traders", "Lotus Foods", "Banyan Tech", "Kavya Iyer", "Finance", "Anita Kulkarni"],
+  "06_header_footer": ["Nimbus Ltd", "Rohan Das", "2,15,000", "14 January 2027", "renegotiated vendor contracts"],
+  "07_scanned": ["Annual Summary 2026", "Kestrel Systems", "9,84,000", "Coimbatore", "5 May 2026", "SCN-3309"]
+}
