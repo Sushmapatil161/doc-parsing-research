@@ -1,0 +1,39 @@
+@'
+file,tool,table_intact,reading_order,notes
+01_basic.docx,docling,n/a,Yes,
+01_basic.docx,markitdown,n/a,Yes,
+01_basic.docx,pymupdf4llm,n/a,n/a,unsupported format
+01_basic.pdf,docling,n/a,Yes,
+01_basic.pdf,markitdown,n/a,Yes,headings lost (no # markup)
+01_basic.pdf,pymupdf4llm,n/a,Yes,
+02_table.docx,docling,Partial,Yes,Q3 2026 only over July; July/August as separate row
+02_table.docx,markitdown,Partial,Yes,empty header row; July/August row has 2 cells and is misaligned
+02_table.docx,pymupdf4llm,n/a,n/a,unsupported format
+02_table.pdf,docling,Yes,Yes,merged header flattened correctly (Q3 2026 - July / Q3 2026 - August); rupee sign displaced
+02_table.pdf,markitdown,Partial,Yes,Q3 2026 only over August; footer sentence pulled into table as a row
+02_table.pdf,pymupdf4llm,Partial,Yes,Q3 2026 only over August; rupee sign displaced
+03_two_column.docx,docling,n/a,Yes,
+03_two_column.docx,markitdown,n/a,Yes,
+03_two_column.docx,pymupdf4llm,n/a,n/a,unsupported format
+03_two_column.pdf,docling,n/a,Yes,
+03_two_column.pdf,markitdown,n/a,Partial,Delta 9 heading placed after first Orion Labs sentence; headings lost
+03_two_column.pdf,pymupdf4llm,n/a,Yes,
+04_slides.pdf,docling,Yes,Yes,slide titles as headings; bullets and table kept
+04_slides.pdf,markitdown,Yes,Yes,table clean; slide titles not marked as headings
+04_slides.pdf,pymupdf4llm,Yes,Yes,slide titles as bold headings; bullets and table kept
+04_slides.pptx,docling,Yes,Yes,bullets kept; slide boundaries lost
+04_slides.pptx,markitdown,Yes,Yes,slide numbers kept; bullet markup lost
+04_slides.pptx,pymupdf4llm,n/a,n/a,unsupported format
+05_sheet.xlsx,docling,Yes,Yes,clean tables but sheet names lost; thousands separator lost
+05_sheet.xlsx,markitdown,Yes,Yes,sheet names kept; empty cell shown as NaN; thousands separator lost
+05_sheet.xlsx,pymupdf4llm,n/a,n/a,unsupported format
+06_header_footer.docx,docling,n/a,Yes,
+06_header_footer.docx,markitdown,n/a,Yes,
+06_header_footer.docx,pymupdf4llm,n/a,n/a,unsupported format
+06_header_footer.pdf,docling,n/a,Yes,
+06_header_footer.pdf,markitdown,n/a,Yes,
+06_header_footer.pdf,pymupdf4llm,n/a,Yes,
+07_scanned.pdf,docling,n/a,Yes,OCR
+07_scanned.pdf,markitdown,n/a,n/a,no text extracted (no OCR)
+07_scanned.pdf,pymupdf4llm,n/a,Yes,OCR; 5/6 facts
+'@ | Set-Content -Path results\manual_checks.csv -Encoding UTF8

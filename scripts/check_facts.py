@@ -3,7 +3,8 @@
 Usage (from the repo root, after run_benchmark.py):
     python scripts/check_facts.py
 
-Reads:  data/ground_truth.json, results/<tool>/<file>.md, results/summary.csv
+Reads:  data/ground_truth.json, results/<tool>/<file>.md, results/summary.csv,
+        results/manual_checks.csv (your by-eye ratings; optional)
 Writes: results/facts.csv          found/total and the list of missing facts
         results/results_table.md   table for docs/report.md (fill the two "by eye" columns yourself)
 
@@ -34,6 +35,11 @@ def main():
     if (RESULTS / "summary.csv").exists():
         with open(RESULTS / "summary.csv", encoding="utf-8") as f:
             summary = {(r["tool"], r["file"]): r for r in csv.DictReader(f)}
+
+    manual = {}
+    if (RESULTS / "manual_checks.csv").exists():
+        with open(RESULTS / "manual_checks.csv", encoding="utf-8-sig") as f:
+            manual = {(r["file"].strip(), r["tool"].strip()): r for r in csv.DictReader(f)}
 
     fact_rows, table_rows = [], []
     for tool in TOOLS:
@@ -70,14 +76,17 @@ def main():
     lines = ["| Document | Tool | First run (s) | Warm run (s) | Peak RAM (MB) | Facts found | Table intact? | Reading order OK? |",
              "|---|---|---|---|---|---|---|---|"]
     for r in table_rows:
-        lines.append("| " + " | ".join(str(x) for x in r) + " | ? | ? |")
+        m = manual.get((r[0], r[1]), {})
+        table_ok = (m.get("table_intact") or "?").strip()
+        order_ok = (m.get("reading_order") or "?").strip()
+        lines.append("| " + " | ".join(str(x) for x in r) + f" | {table_ok} | {order_ok} |")
     (RESULTS / "results_table.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(f"{'tool':12} {'file':24} found")
     for r in fact_rows:
         print(f"{r['tool']:12} {r['file']:24} {r['found']}/{r['total']}")
     print("\nWrote results/facts.csv and results/results_table.md")
-    print("Now open the outputs and replace each '?' with Yes / Partial / No / n/a.")
+    print("By-eye columns come from results/manual_checks.csv. Any '?' left means: not rated yet.")
 
 
 if __name__ == "__main__":
