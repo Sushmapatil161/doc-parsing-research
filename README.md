@@ -65,7 +65,18 @@ Installation takes 10 to 20 minutes because Docling installs PyTorch (over 1 GB)
     docling data\01_basic.pdf --to md --output results\smoke_test
     python -c "import pymupdf4llm; print(pymupdf4llm.to_markdown('data/01_basic.pdf'))"
 Each command should print or save the "Project Falcon Overview" text. Docling's first run downloads its AI models (about 2 minutes); later runs reuse them.
-### 5. Run the benchmark
+### 4b. Record your hardware and tool versions
+Speed and memory numbers only mean something if the hardware is known. Record these in docs/setup.md before running the benchmark:
+    systeminfo | findstr /C:"OS Name" /C:"OS Version" /C:"Total Physical Memory"
+    Get-CimInstance Win32_Processor | Select Name, NumberOfCores, NumberOfLogicalProcessors
+    Get-CimInstance Win32_VideoController | Select Name
+    Get-PSDrive C
+    python --version
+Record the tool versions:
+    pip show markitdown docling pymupdf4llm | findstr /B "Name Version"
+To save your full package list without overwriting the original requirements.txt:
+    pip freeze > requirements-mine.txt
+The benchmark also saves Python, OS and tool versions automatically in results/run_info.json.### 5. Run the benchmark
 Quick run (1 repeat, about 10 to 20 minutes on a laptop CPU):
     python scripts/run_benchmark.py --repeats 1
 Full run as used in the report (3 repeats, about 30 to 40 minutes):
@@ -87,7 +98,28 @@ These two columns cannot be measured automatically. Open the outputs in results/
 - table_intact: Yes (rows and columns correct, merged header understood), Partial (values correct but headers broken), No (table lost), n/a (no table)
 - reading_order: Yes, Partial, No, or n/a
 Then run python scripts/check_facts.py again. The ratings are merged into results/results_table.md automatically. Any "?" left in the table means that combination has not been rated yet.
-## Adding your own test document
+## Useful commands for analysing results
+Run these from the repository folder with the virtual environment active.
+Show one document's output from all three tools, for the by-eye check (change the file name as needed):
+    foreach ($t in "markitdown","docling","pymupdf4llm") { "===== $t =====" ; Get-Content "results\$t\02_table.pdf.md" -Encoding UTF8 }
+Show the mean time and memory per tool and document:
+    Import-Csv results\summary.csv | Format-Table tool, file, status, first_s, warm_s, peak_mb
+Show which facts each tool missed:
+    Import-Csv results\facts.csv | Where-Object { $_.missing } | Format-Table tool, file, missing
+Show failed, unsupported or timed-out runs:
+    Import-Csv results\runs.csv | Where-Object { $_.status -ne "ok" } | Format-Table tool, file, status, error
+Show every individual run of one tool on one document (useful to spot outliers):
+    Import-Csv results\runs.csv | Where-Object { $_.file -eq "07_scanned.pdf" -and $_.tool -eq "docling" } | Format-Table repeat, first_s, warm_s, peak_mb
+Check that every cell of the results table has been rated (prints nothing when complete):
+    Select-String -Path results\results_table.md -Pattern "\?"
+Check that the scanned test PDF really has no text layer (should print 0):
+    python -c "import pymupdf; print(len(pymupdf.open('data/07_scanned.pdf')[0].get_text().strip()))"
+Copy the results table into the report:
+    Get-Content results\results_table.md -Encoding UTF8 | Add-Content docs\report.md -Encoding UTF8
+Save your changes to GitHub:
+    git add .
+    git commit -m "Describe what you changed"
+    git push## Adding your own test document
 1. Put the file in data/ (supported: .pdf, .docx, .pptx, .xlsx). Use dummy content only.
 2. Add its facts to data/ground_truth.json, using the file name without extension as the key, for example "08_invoice": ["INV-9001", "Acme Ltd"].
 3. Re-run steps 5 to 7.
@@ -128,3 +160,4 @@ Details and verification status: docs/report.md, section 1.4.
 - Only self-made documents with dummy content; no real documents.
 - Every result is reproducible: versions in requirements.txt and results/run_info.json, settings and scripts in this repository.
 - Test documents and benchmark scripts were created with AI assistance (Claude) and reviewed by the author.
+
