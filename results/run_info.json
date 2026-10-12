@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-12T12:30:56",
+  "python": "3.10.3",
+  "os": "Windows-10-10.0.22631-SP0",
+  "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "cpu_count": 8,
+  "repeats": 3,
+  "tools": {
+    "markitdown": "0.1.8",
+    "docling": "2.138.0",
+    "pymupdf4llm": "1.28.2"
+  },
+  "documents": [
+    "01_basic.docx",
+    "01_basic.pdf",
+    "02_table.docx",
+    "02_table.pdf",
+    "03_two_column.docx",
+    "03_two_column.pdf",
+    "04_slides.pdf",
+    "04_slides.pptx",
+    "05_sheet.xlsx",
+    "06_header_footer.docx",
+    "06_header_footer.pdf",
+    "07_scanned.pdf"
+  ],
+  "notes": "Each run is a fresh process. first_s includes lazy model loading; warm_s is a second conversion in the same process. Default settings for every tool."
+}
