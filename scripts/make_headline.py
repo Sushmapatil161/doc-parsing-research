@@ -1,9 +1,16 @@
-"""Build headline numbers per tool from results CSVs and put them at the top of docs/report.md.
+"""Build headline numbers per tool from the results files and put
+them at the top of docs/report.md (between the HEADLINE markers).
+
+Times use the MEDIAN of the repeats for each document, so one slow
+repeat cannot distort the result; then the mean over documents.
 Usage: python scripts/make_headline.py
 """
 import csv
+import statistics
 from pathlib import Path
+
 ROOT = Path(__file__).resolve().parent.parent
+RUNS = ROOT / "results" / "runs.csv"
 SUMMARY = ROOT / "results" / "summary.csv"
 FACTS = ROOT / "results" / "facts.csv"
 REPORT = ROOT / "docs" / "report.md"
@@ -13,63 +20,121 @@ END = "<!-- HEADLINE END -->"
 TITLE = "# Document Parsing Research Report"
 SCAN = "07_scanned.pdf"
 TOOLS = ["markitdown", "pymupdf4llm", "docling"]
+
+
+def read_csv(path):
+    with open(path, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
 def num(x):
     try:
         return float(x)
     except (TypeError, ValueError):
         return None
+
+
+def fmt(x, digits=2):
+    return "-" if x is None else ("{:." + str(digits) + "f}").format(x)
+
+
+runs = read_csv(RUNS)
+summary = read_csv(SUMMARY)
+facts = {(r["tool"], r["file"]): r for r in read_csv(FACTS)}
+
+
+def median_of(rows, col):
+    xs = [num(r[col]) for r in rows if num(r[col]) is not None]
+    return statistics.median(xs) if xs else None
+
+
+def per_doc(tool, only_pdf):
+    """Median of the ok repeats for each document of one tool."""
+    out = {}
+    for r in runs:
+        f = r["file"]
+        if r["tool"] != tool or r["status"] != "ok":
+            continue
+        if only_pdf and not f.endswith(".pdf"):
+            continue
+        out.setdefault(f, []).append(r)
+    result = {}
+    for f, rows in out.items():
+        result[f] = {
+            "load": median_of(rows, "load_s"),
+            "first": median_of(rows, "first_s"),
+            "warm": median_of(rows, "warm_s"),
+            "peak": median_of(rows, "peak_mb"),
+        }
+    return result
+
+
 def mean(xs):
     xs = [x for x in xs if x is not None]
     return sum(xs) / len(xs) if xs else None
-def fmt(x, digits=2):
-    return "-" if x is None else f"{x:.{digits}f}"
-def read_csv(path):
-    with open(path, encoding="utf-8", newline="") as f:
-        return list(csv.DictReader(f))
-summary = read_csv(SUMMARY)
-facts = read_csv(FACTS)
-ok = {(r["tool"], r["file"]): r for r in summary if r["status"] == "ok"}
-fact_rows = {(r["tool"], r["file"]): r for r in facts}
+
+
 def stats(tool, only_pdf):
-    keep = lambda f: (not only_pdf) or f.endswith(".pdf")
-    rows = [r for (t, f), r in ok.items() if t == tool and keep(f)]
-    all_docs = [r for r in summary if r["tool"] == tool and keep(r["file"])]
+    docs = per_doc(tool, only_pdf)
+    all_docs = [r for r in summary if r["tool"] == tool
+                and (not only_pdf or r["file"].endswith(".pdf"))]
     found = total = 0
-    for r in rows:
-        fr = fact_rows.get((tool, r["file"]))
+    for f in docs:
+        fr = facts.get((tool, f))
         if fr:
             found += int(fr["found"])
             total += int(fr["total"])
-    scan = fact_rows.get((tool, SCAN)) if (tool, SCAN) in ok else None
-    peaks = [num(r["peak_mb"]) for r in rows if num(r["peak_mb"]) is not None]
+    scan = facts.get((tool, SCAN)) if SCAN in docs else None
+    peaks = [d["peak"] for d in docs.values() if d["peak"] is not None]
+    pct = "{}/{} ({:.0f}%)".format(found, total, 100 * found / total)
     return {
-        "docs": f"{len(rows)}/{len(all_docs)}",
-        "facts": f"{found}/{total} ({100 * found / total:.0f}%)" if total else "-",
-        "scan": f'{scan["found"]}/{scan["total"]}' if scan else "-",
-        "warm": mean(num(r["warm_s"]) for r in rows),
-        "first": mean(num(r["first_s"]) for r in rows),
+        "docs": str(len(docs)) + "/" + str(len(all_docs)),
+        "facts": pct if total else "-",
+        "scan": (scan["found"] + "/" + scan["total"]) if scan else "-",
+        "load": mean(d["load"] for d in docs.values()),
+        "first": mean(d["first"] for d in docs.values()),
+        "warm": mean(d["warm"] for d in docs.values()),
         "peak": max(peaks) if peaks else None,
     }
+
+
 def table(only_pdf):
     lines = [
-        "| Tool | Docs parsed | Facts found | Scanned page facts | Avg warm s/doc | Avg first-run s/doc | Peak memory (MB) |",
-        "|---|---|---|---|---|---|---|",
+        "| Tool | Docs parsed | Facts found | Scanned page facts"
+        " | Model load s | First run s/doc | Warm s/doc"
+        " | Peak memory (MB) |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for tool in TOOLS:
         s = stats(tool, only_pdf)
-        lines.append(f'| {tool} | {s["docs"]} | {s["facts"]} | {s["scan"]} | {fmt(s["warm"])} | {fmt(s["first"])} | {fmt(s["peak"], 0)} |')
+        lines.append("| " + " | ".join([
+            tool, s["docs"], s["facts"], s["scan"], fmt(s["load"]),
+            fmt(s["first"]), fmt(s["warm"]), fmt(s["peak"], 0)]) + " |")
     return lines
+
+
 block = [START, "## Headline numbers", "",
-         "Generated by scripts/make_headline.py from results/summary.csv and results/facts.csv. Do not edit by hand. [measured]", "",
-         "**All documents each tool could open** (PyMuPDF4LLM opens PDFs only, so its averages cover fewer and slower files):", ""]
+         "Generated by scripts/make_headline.py from results/runs.csv,"
+         " results/summary.csv and results/facts.csv."
+         " Do not edit by hand. [measured]", "",
+         "**All documents each tool could open** (PyMuPDF4LLM opens"
+         " PDFs only, so its averages cover fewer and slower files):", ""]
 block += table(False)
-block += ["", "**PDFs only** (the same 6 PDFs for every tool, so this is the fair comparison):", ""]
+block += ["", "**PDFs only** (the same 6 PDFs for every tool,"
+          " so this is the fair comparison):", ""]
 block += table(True)
 block += ["",
-          "Facts found = facts from data/ground_truth.json found in the output, summed over documents. "
-          "Times are the per-document first_s and warm_s values from results/summary.csv, averaged over documents. "
-          "First run includes loading models; warm = later runs. Peak memory = highest peak on any single document.",
+          "How to read the times: for each document we take the MEDIAN"
+          " of the repeats (so one slow repeat cannot distort it),"
+          " then the mean over documents. Model load = load_s,"
+          " first run = first_s, warm = warm_s, as measured by"
+          " scripts/parse_one.py in a fresh process per repeat."
+          " A one-time model download is not included: it happened"
+          " before the benchmark (file dates in"
+          " .venv/Lib/site-packages/rapidocr/models)."
+          " Peak memory = highest per-document median.",
           END]
+
 OUT.write_text("\n".join(block[1:-1]) + "\n", encoding="utf-8")
 t = REPORT.read_bytes().decode("utf-8")
 nl = "\r\n" if "\r\n" in t else "\n"
@@ -85,4 +150,5 @@ else:
     raise SystemExit("ERROR: report title not found, nothing changed")
 REPORT.write_bytes(t.encode("utf-8"))
 print("\n".join(block[1:-1]))
-print("\nUpdated docs/report.md and wrote results/headline.md")
+print()
+print("Updated docs/report.md and wrote results/headline.md")
