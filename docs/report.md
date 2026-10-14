@@ -29,10 +29,12 @@ Key point: AGPL also applies when software is offered as a network service (for 
 * Tools: markitdown 0.1.8, docling 2.138.0, pymupdf4llm 1.28.2, all with default settings.
 * Each document was run 3 times per tool, each run in a fresh Python process (scripts/run_benchmark.py).
 * First run = first conversion in a new process, including model loading. Warm run = second conversion in the same process (models already loaded, like a running service).
+* Evidence tags: **[measured]** = seen in our own test runs (source file named); **[read]** = taken from documentation or licence pages, not tested by us. Section 1 (landscape and licences) is [read] unless marked otherwise.
 * Peak RAM = peak working set of the process (psutil).
 * Facts found = automatic check against data/ground_truth.json (scripts/check_facts.py).
 * Table intact / reading order = checked by eye; ratings and reasons in results/manual_checks.csv.
-* Hardware: Intel i5-1135G7 (4 cores / 8 threads), no dedicated GPU; see docs/setup.md.
+* Hardware: Intel i5-1135G7 (4 cores / 8 threads), 8 GB RAM (7.8 GB usable), no dedicated GPU; Windows 11 Home Single Language 23H2 (build 22631); see docs/setup.md.
+* Coverage [measured, results/summary.csv]: data/ has 13 files, but scan.png is only the source image used to create 07_scanned.pdf, so the benchmark ran on 12 documents: 12 documents x 3 tools = 36 rows. Of these, 30 are real results. PyMuPDF4LLM opens only PDFs, so its 6 rows for .docx, .pptx and .xlsx files have status `unsupported` (0 successful runs). Docling and MarkItDown succeeded on all 12 documents.
 
 ## 3. Results
 
@@ -79,28 +81,28 @@ Times are the mean of 3 runs. "unsupported" = the tool cannot read that format.
 
 ## 4. Observations (Day 1)
 
-1. Fact count alone does not separate the tools on digital documents: all three found 100% of facts in every digital file.
-2. Structure does separate them. Only Docling (on the PDF) rebuilt the merged table header correctly ("Q3 2026 - July / Q3 2026 - August"). MarkItDown also pulled a sentence below the table into the table. On the two-column PDF, MarkItDown placed the "Delta 9" heading in the wrong position, yet still scored 100% on facts. A fact check misses structural errors.
-3. Scanned page: MarkItDown 0/6 (no OCR, returns empty text silently), PyMuPDF4LLM 5/6, Docling 6/6.
-4. Cost: on PDFs Docling is about 100x slower than MarkItDown (warm 4.2 s vs 0.043 s on 01_basic.pdf) and uses about 8x more memory (0.9-1.3 GB vs 115 MB). Each new process also pays about 15 s of model loading.
-5. Docling is fast on Word, PowerPoint and Excel files (under 0.2 s), because these formats already contain structure and no AI models are needed.
-6. The original Office file is not always the best input: Docling handled the merged table header better from the PDF than from the DOCX, and Docling and PyMuPDF4LLM produced better slide headings from the slides PDF than from the PPTX.
-7. Spreadsheets: both tools output the formula result (36450) and dropped thousands separators. MarkItDown keeps sheet names but writes "NaN" for empty cells; Docling loses sheet names.
+1. Fact count alone does not separate the tools on digital documents: all three found 100% of facts in every digital file they could open. [measured, results/facts.csv]
+2. Structure does separate them. Only Docling (on the PDF) rebuilt the merged table header correctly ("Q3 2026 - July / Q3 2026 - August"). MarkItDown also pulled a sentence below the table into the table. On the two-column PDF, MarkItDown placed the "Delta 9" heading in the wrong position, yet still scored 100% on facts. A fact check misses structural errors. [measured, checked by eye, results/manual_checks.csv]
+3. Scanned page: MarkItDown 0/6 (returned empty text with no error), PyMuPDF4LLM 5/6, Docling 6/6. [measured, results/facts.csv] MarkItDown has no built-in OCR. [read, MarkItDown docs]
+4. Cost: on PDFs Docling is about 100x slower than MarkItDown (warm 4.2 s vs 0.043 s on 01_basic.pdf) and uses about 8x more memory (0.9-1.3 GB vs 115 MB). Each new process also pays about 15 s of model loading (estimated as first run minus warm run, not timed separately yet). [measured, results/summary.csv]
+5. Docling is fast on Word, PowerPoint and Excel files (under 0.2 s), because these formats already contain structure and no AI models are needed. [time measured, results/summary.csv; reason read from Docling docs]
+6. The original Office file is not always the best input: Docling handled the merged table header better from the PDF than from the DOCX, and Docling produced better slide headings from the slides PDF than from the PPTX (PyMuPDF4LLM cannot open PPTX, so for slides it was only tested on the PDF). [measured, checked by eye]
+7. Spreadsheets: both tools output the formula result (36450) and dropped thousands separators. MarkItDown keeps sheet names but writes "NaN" for empty cells; Docling loses sheet names. [measured, outputs in results/markitdown and results/docling]
 
 ## 5. Preliminary recommendation (to be confirmed)
 
-* Office files (DOCX/PPTX/XLSX) and simple digital PDFs where speed matters: MarkItDown (MIT licence, fastest, lightest), but it must never be used alone on scanned documents.
-* PDFs with complex tables, multi-column layouts, or scans: Docling (MIT licence), accepting higher time and memory cost.
-* PyMuPDF4LLM: good quality and fast on PDFs, but PDF-only and AGPL-3.0 licensed, so it needs a commercial licence or full source disclosure for business use.
+* Office files (DOCX/PPTX/XLSX) and simple digital PDFs where speed matters: MarkItDown (MIT licence, fastest, lightest), but it must never be used alone on scanned documents. [speed and scan failure measured; licence read]
+* PDFs with complex tables, multi-column layouts, or scans: Docling (MIT licence), accepting higher time and memory cost. [quality, time and memory measured; licence read]
+* PyMuPDF4LLM: good quality and fast on PDFs, but PDF-only and AGPL-3.0 licensed, so it needs a commercial licence or full source disclosure for business use. [quality, speed and PDF-only measured; licence read]
 
 ## 6. Limitations and open questions
 
-* Small test set (13 files, 1 page in most files); results may differ on long or real-world documents.
+* Small test set (12 documents, plus scan.png as the source image; 1 page in most files); results may differ on long or real-world documents.
 * PDFs were exported with LibreOffice, not Microsoft Word.
-* CPU only; Docling would be faster with a GPU.
+* CPU only; Docling would probably be faster with a GPU. [read, not tested]
 * Docling's first run on the scanned page (114.8 s) was much slower than warm (6.1 s); possibly one-time OCR model loading. To investigate.
 * Docling warm time on 06_header_footer.pdf (19.9 s) was unusually close to its first run; possibly an outlier or thermal throttling. To investigate.
-* PyMuPDF4LLM read the scan without Tesseract installed; which OCR engine it used still needs to be confirmed.
+* PyMuPDF4LLM read the scan without Tesseract installed; which OCR engine it used still needs to be confirmed. [score measured; engine unknown]
 
 
 
