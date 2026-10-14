@@ -1,4 +1,3 @@
-@'
 file,tool,table_intact,reading_order,notes
 01_basic.docx,docling,n/a,Yes,
 01_basic.docx,markitdown,n/a,Yes,
@@ -36,4 +35,3 @@ file,tool,table_intact,reading_order,notes
 07_scanned.pdf,docling,n/a,Yes,OCR
 07_scanned.pdf,markitdown,n/a,n/a,no text extracted (no OCR)
 07_scanned.pdf,pymupdf4llm,n/a,Yes,OCR; 5/6 facts
-'@ | Set-Content -Path results\manual_checks.csv -Encoding UTF8

@@ -1,38 +1,41 @@
-| Document | Tool | First run (s) | Warm run (s) | Peak RAM (MB) | Facts found | Table intact? | Reading order OK? |
-|---|---|---|---|---|---|---|---|
-| 01_basic.docx | docling | 0.183 | 0.076 | 324.033 | 8/8 (100%) | n/a | Yes |
-| 01_basic.docx | markitdown | 0.032 | 0.025 | 114.933 | 8/8 (100%) | n/a | Yes |
-| 01_basic.docx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 01_basic.pdf | docling | 20.866 | 4.204 | 884.133 | 8/8 (100%) | n/a | Yes |
-| 01_basic.pdf | markitdown | 0.049 | 0.043 | 115.0 | 8/8 (100%) | n/a | Yes |
-| 01_basic.pdf | pymupdf4llm | 1.937 | 0.296 | 311.5 | 8/8 (100%) | n/a | Yes |
-| 02_table.docx | docling | 0.19 | 0.096 | 323.7 | 9/9 (100%) | Partial | Yes |
-| 02_table.docx | markitdown | 0.063 | 0.052 | 115.033 | 9/9 (100%) | Partial | Yes |
-| 02_table.docx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 02_table.pdf | docling | 25.333 | 6.813 | 953.833 | 9/9 (100%) | Yes | Yes |
-| 02_table.pdf | markitdown | 0.042 | 0.036 | 114.9 | 9/9 (100%) | Partial | Yes |
-| 02_table.pdf | pymupdf4llm | 1.121 | 0.285 | 311.633 | 9/9 (100%) | Partial | Yes |
-| 03_two_column.docx | docling | 0.176 | 0.074 | 323.167 | 9/9 (100%) | n/a | Yes |
-| 03_two_column.docx | markitdown | 0.029 | 0.026 | 114.967 | 9/9 (100%) | n/a | Yes |
-| 03_two_column.docx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 03_two_column.pdf | docling | 20.026 | 4.248 | 1009.367 | 9/9 (100%) | n/a | Yes |
-| 03_two_column.pdf | markitdown | 0.071 | 0.056 | 115.067 | 9/9 (100%) | n/a | Partial |
-| 03_two_column.pdf | pymupdf4llm | 1.119 | 0.243 | 311.267 | 9/9 (100%) | n/a | Yes |
-| 04_slides.pdf | docling | 31.497 | 11.825 | 1116.7 | 8/8 (100%) | ? | ? |
-| 04_slides.pdf | markitdown | 0.051 | 0.049 | 114.867 | 8/8 (100%) | ? | ? |
-| 04_slides.pdf | pymupdf4llm | 1.555 | 0.971 | 311.167 | 8/8 (100%) | ? | ? |
-| 04_slides.pptx | docling | 0.181 | 0.064 | 325.833 | 8/8 (100%) | Yes | Yes |
-| 04_slides.pptx | markitdown | 0.024 | 0.019 | 114.867 | 8/8 (100%) | Yes | Yes |
-| 04_slides.pptx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 05_sheet.xlsx | docling | 0.137 | 0.03 | 322.967 | 7/7 (100%) | ? | ? |
-| 05_sheet.xlsx | markitdown | 0.036 | 0.027 | 114.833 | 7/7 (100%) | ? | ? |
-| 05_sheet.xlsx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 06_header_footer.docx | docling | 0.19 | 0.086 | 323.333 | 5/5 (100%) | n/a | Yes |
-| 06_header_footer.docx | markitdown | 0.034 | 0.026 | 114.967 | 5/5 (100%) | n/a | Yes |
-| 06_header_footer.docx | pymupdf4llm |  |  |  | unsupported | n/a | n/a |
-| 06_header_footer.pdf | docling | 25.342 | 19.865 | 1261.367 | 5/5 (100%) | n/a | Yes |
-| 06_header_footer.pdf | markitdown | 0.073 | 0.066 | 115.1 | 5/5 (100%) | n/a | Yes |
-| 06_header_footer.pdf | pymupdf4llm | 1.33 | 0.488 | 311.5 | 5/5 (100%) | n/a | Yes |
-| 07_scanned.pdf | docling | 114.806 | 6.082 | 997.9 | 6/6 (100%) | n/a | Yes |
-| 07_scanned.pdf | markitdown | 0.016 | 0.009 | 115.1 | 0/6 (0%) | n/a | n/a |
-| 07_scanned.pdf | pymupdf4llm | 4.521 | 3.387 | 663.3 | 5/6 (83%) | n/a | Yes |
+
+|Document|Tool|Status|Model load (s)|First run (s)|Warm run (s)|Peak RAM (MB)|Facts found|Table cells (auto)|Reading order (auto)|Table intact (by eye)|Reading order (by eye)|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|01_basic.docx|markitdown|ok|1.38|0.032|0.026|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.docx|pymupdf4llm|unsupported||||||||||
+|01_basic.docx|docling|ok|10.72|0.177|0.077|324|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|markitdown|ok|1.33|0.045|0.041|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|pymupdf4llm|ok|0.93|1.095|0.225|312|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|docling|ok|14.20|21.170|4.218|899|8/8 (100%)|n/a|PASS|n/a|Yes|
+|02_table.docx|markitdown|ok|1.38|0.055|0.051|115|9/9 (100%)|12/16 (75%)|PASS|Partial|Yes|
+|02_table.docx|pymupdf4llm|unsupported||||||||||
+|02_table.docx|docling|ok|11.56|0.186|0.096|324|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|markitdown|ok|1.39|0.042|0.036|115|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|pymupdf4llm|ok|0.93|1.132|0.278|312|9/9 (100%)|13/16 (81%)|PASS|Partial|Yes|
+|02_table.pdf|docling|ok|15.04|25.010|6.905|1011|9/9 (100%)|15/16 (94%)|PASS|Yes|Yes|
+|03_two_column.docx|markitdown|ok|1.32|0.030|0.027|115|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.docx|pymupdf4llm|unsupported||||||||||
+|03_two_column.docx|docling|ok|11.01|0.176|0.074|323|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|markitdown|ok|1.33|0.068|0.062|115|9/9 (100%)|n/a|FAIL: Delta 9|n/a|Partial|
+|03_two_column.pdf|pymupdf4llm|ok|0.93|1.111|0.247|312|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|docling|ok|14.17|19.773|4.169|1027|9/9 (100%)|n/a|PASS|n/a|Yes|
+|04_slides.pdf|markitdown|ok|1.24|0.046|0.045|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|pymupdf4llm|ok|0.97|1.555|1.009|311|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|docling|ok|16.24|30.596|11.677|1174|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pptx|markitdown|ok|1.32|0.023|0.019|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pptx|pymupdf4llm|unsupported||||||||||
+|04_slides.pptx|docling|ok|12.65|0.179|0.065|326|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|05_sheet.xlsx|markitdown|ok|1.31|0.029|0.025|115|7/7 (100%)|18/23 (78%)|PASS|Yes|Yes|
+|05_sheet.xlsx|pymupdf4llm|unsupported||||||||||
+|05_sheet.xlsx|docling|ok|12.26|0.147|0.029|323|7/7 (100%)|19/23 (83%)|PASS|Yes|Yes|
+|06_header_footer.docx|markitdown|ok|1.32|0.031|0.025|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.docx|pymupdf4llm|unsupported||||||||||
+|06_header_footer.docx|docling|ok|10.66|0.183|0.083|323|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|markitdown|ok|1.34|0.078|0.062|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|pymupdf4llm|ok|0.88|1.350|0.493|312|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|docling|ok|14.69|25.265|9.035|1062|5/5 (100%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|markitdown|ok|1.41|0.012|0.009|115|0/6 (0%)|n/a|n/a|n/a|n/a|
+|07_scanned.pdf|pymupdf4llm|ok|0.92|4.499|3.403|664|5/6 (83%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|docling|ok|16.02|26.378|6.061|848|6/6 (100%)|n/a|PASS|n/a|Yes|
+
+Generated by scripts/make_results_table.py. Do not edit by hand. [measured] Times: median of the repeats in results/runs.csv. Facts: results/facts.csv. Table cells: cell-by-cell against data/expected_tables (scripts/score_tables.py; for 05_sheet.xlsx both sheets are added together). Reading order: scripts/reading_order.py (FAIL names the out-of-order fact). By-eye columns: Day 1 manual ratings in results/manual_checks.csv. n/a = the document has no table.

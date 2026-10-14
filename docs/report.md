@@ -64,51 +64,109 @@ Key point: AGPL also applies when software is offered as a network service (for 
 
 Times are the mean of 3 runs. "unsupported" = the tool cannot read that format.
 
-|Document|Tool|First run (s)|Warm run (s)|Peak RAM (MB)|Facts found|Table intact?|Reading order OK?|
-|-|-|-|-|-|-|-|-|
-|01_basic.docx|docling|0.183|0.076|324.033|8/8 (100%)|n/a|Yes|
-|01_basic.docx|markitdown|0.032|0.025|114.933|8/8 (100%)|n/a|Yes|
-|01_basic.docx|pymupdf4llm||||unsupported|n/a|n/a|
-|01_basic.pdf|docling|20.866|4.204|884.133|8/8 (100%)|n/a|Yes|
-|01_basic.pdf|markitdown|0.049|0.043|115.0|8/8 (100%)|n/a|Yes|
-|01_basic.pdf|pymupdf4llm|1.937|0.296|311.5|8/8 (100%)|n/a|Yes|
-|02_table.docx|docling|0.19|0.096|323.7|9/9 (100%)|Partial|Yes|
-|02_table.docx|markitdown|0.063|0.052|115.033|9/9 (100%)|Partial|Yes|
-|02_table.docx|pymupdf4llm||||unsupported|n/a|n/a|
-|02_table.pdf|docling|25.333|6.813|953.833|9/9 (100%)|Yes|Yes|
-|02_table.pdf|markitdown|0.042|0.036|114.9|9/9 (100%)|Partial|Yes|
-|02_table.pdf|pymupdf4llm|1.121|0.285|311.633|9/9 (100%)|Partial|Yes|
-|03_two_column.docx|docling|0.176|0.074|323.167|9/9 (100%)|n/a|Yes|
-|03_two_column.docx|markitdown|0.029|0.026|114.967|9/9 (100%)|n/a|Yes|
-|03_two_column.docx|pymupdf4llm||||unsupported|n/a|n/a|
-|03_two_column.pdf|docling|20.026|4.248|1009.367|9/9 (100%)|n/a|Yes|
-|03_two_column.pdf|markitdown|0.071|0.056|115.067|9/9 (100%)|n/a|Partial|
-|03_two_column.pdf|pymupdf4llm|1.119|0.243|311.267|9/9 (100%)|n/a|Yes|
-|04_slides.pdf|docling|31.497|11.825|1116.7|8/8 (100%)|?|?|
-|04_slides.pdf|markitdown|0.051|0.049|114.867|8/8 (100%)|?|?|
-|04_slides.pdf|pymupdf4llm|1.555|0.971|311.167|8/8 (100%)|?|?|
-|04_slides.pptx|docling|0.181|0.064|325.833|8/8 (100%)|Yes|Yes|
-|04_slides.pptx|markitdown|0.024|0.019|114.867|8/8 (100%)|Yes|Yes|
-|04_slides.pptx|pymupdf4llm||||unsupported|n/a|n/a|
-|05_sheet.xlsx|docling|0.137|0.03|322.967|7/7 (100%)|?|?|
-|05_sheet.xlsx|markitdown|0.036|0.027|114.833|7/7 (100%)|?|?|
-|05_sheet.xlsx|pymupdf4llm||||unsupported|n/a|n/a|
-|06_header_footer.docx|docling|0.19|0.086|323.333|5/5 (100%)|n/a|Yes|
-|06_header_footer.docx|markitdown|0.034|0.026|114.967|5/5 (100%)|n/a|Yes|
-|06_header_footer.docx|pymupdf4llm||||unsupported|n/a|n/a|
-|06_header_footer.pdf|docling|25.342|19.865|1261.367|5/5 (100%)|n/a|Yes|
-|06_header_footer.pdf|markitdown|0.073|0.066|115.1|5/5 (100%)|n/a|Yes|
-|06_header_footer.pdf|pymupdf4llm|1.33|0.488|311.5|5/5 (100%)|n/a|Yes|
-|07_scanned.pdf|docling|114.806|6.082|997.9|6/6 (100%)|n/a|Yes|
-|07_scanned.pdf|markitdown|0.016|0.009|115.1|0/6 (0%)|n/a|n/a|
-|07_scanned.pdf|pymupdf4llm|4.521|3.387|663.3|5/6 (83%)|n/a|Yes|
+<!-- RESULTS START -->
+
+|Document|Tool|Status|Model load (s)|First run (s)|Warm run (s)|Peak RAM (MB)|Facts found|Table cells (auto)|Reading order (auto)|Table intact (by eye)|Reading order (by eye)|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|01_basic.docx|markitdown|ok|1.38|0.032|0.026|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.docx|pymupdf4llm|unsupported||||||||||
+|01_basic.docx|docling|ok|10.72|0.177|0.077|324|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|markitdown|ok|1.33|0.045|0.041|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|pymupdf4llm|ok|0.93|1.095|0.225|312|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|docling|ok|14.20|21.170|4.218|899|8/8 (100%)|n/a|PASS|n/a|Yes|
+|02_table.docx|markitdown|ok|1.38|0.055|0.051|115|9/9 (100%)|12/16 (75%)|PASS|Partial|Yes|
+|02_table.docx|pymupdf4llm|unsupported||||||||||
+|02_table.docx|docling|ok|11.56|0.186|0.096|324|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|markitdown|ok|1.39|0.042|0.036|115|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|pymupdf4llm|ok|0.93|1.132|0.278|312|9/9 (100%)|13/16 (81%)|PASS|Partial|Yes|
+|02_table.pdf|docling|ok|15.04|25.010|6.905|1011|9/9 (100%)|15/16 (94%)|PASS|Yes|Yes|
+|03_two_column.docx|markitdown|ok|1.32|0.030|0.027|115|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.docx|pymupdf4llm|unsupported||||||||||
+|03_two_column.docx|docling|ok|11.01|0.176|0.074|323|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|markitdown|ok|1.33|0.068|0.062|115|9/9 (100%)|n/a|FAIL: Delta 9|n/a|Partial|
+|03_two_column.pdf|pymupdf4llm|ok|0.93|1.111|0.247|312|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|docling|ok|14.17|19.773|4.169|1027|9/9 (100%)|n/a|PASS|n/a|Yes|
+|04_slides.pdf|markitdown|ok|1.24|0.046|0.045|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|pymupdf4llm|ok|0.97|1.555|1.009|311|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|docling|ok|16.24|30.596|11.677|1174|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pptx|markitdown|ok|1.32|0.023|0.019|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pptx|pymupdf4llm|unsupported||||||||||
+|04_slides.pptx|docling|ok|12.65|0.179|0.065|326|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|05_sheet.xlsx|markitdown|ok|1.31|0.029|0.025|115|7/7 (100%)|18/23 (78%)|PASS|Yes|Yes|
+|05_sheet.xlsx|pymupdf4llm|unsupported||||||||||
+|05_sheet.xlsx|docling|ok|12.26|0.147|0.029|323|7/7 (100%)|19/23 (83%)|PASS|Yes|Yes|
+|06_header_footer.docx|markitdown|ok|1.32|0.031|0.025|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.docx|pymupdf4llm|unsupported||||||||||
+|06_header_footer.docx|docling|ok|10.66|0.183|0.083|323|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|markitdown|ok|1.34|0.078|0.062|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|pymupdf4llm|ok|0.88|1.350|0.493|312|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|docling|ok|14.69|25.265|9.035|1062|5/5 (100%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|markitdown|ok|1.41|0.012|0.009|115|0/6 (0%)|n/a|n/a|n/a|n/a|
+|07_scanned.pdf|pymupdf4llm|ok|0.92|4.499|3.403|664|5/6 (83%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|docling|ok|16.02|26.378|6.061|848|6/6 (100%)|n/a|PASS|n/a|Yes|
+
+Generated by scripts/make_results_table.py. Do not edit by hand. [measured] Times: median of the repeats in results/runs.csv. Facts: results/facts.csv. Table cells: cell-by-cell against data/expected_tables (scripts/score_tables.py; for 05_sheet.xlsx both sheets are added together). Reading order: scripts/reading_order.py (FAIL names the out-of-order fact). By-eye columns: Day 1 manual ratings in results/manual_checks.csv. n/a = the document has no table.
+<!-- RESULTS END -->
+
+## 3b. Day 2 findings (automatic checks, scanned page, timing)
+
+All numbers in this section come from scripts in scripts/ and files in results/. Regenerate the tables with `python scripts/regenerate_report.py`.
+
+### 3b.1 Table accuracy, cell by cell [measured]
+
+Method: the correct tables were written as CSV answer keys in data/expected_tables/. Every value was checked against the generator scripts in scripts/make_test_docs/ (scripts/make_expected_tables.py), so the answer keys do not come from any tool. scripts/score_tables.py finds the best-matching Markdown table in each output and counts exactly matching cells (header cells ignore spaces, '-' and '/'). Results: results/table_scores.csv. Side-by-side views: results/table_details/.
+
+* Sales table with merged header (02_table): every tool got all 12 body cells right; the differences are in the header. Best: Docling on the PDF, 15/16 cells. Its only error is the header "Sales (₹)" written as "Sales ( ) ₹". Worst: MarkItDown on the DOCX, 12/16. The header row is empty, the header text was moved into data rows, and "July | August" ended up under the Region and Sales columns.
+* Slides table (04_slides): all tools 12/12 on both PPTX and PDF.
+* Spreadsheet (05_sheet.xlsx, Invoices sheet): Docling 11/15, MarkItDown 10/15. Both drop the thousands separators that Excel displays (12400 instead of 12,400). MarkItDown also writes "NaN" for the empty cell. Staff sheet: both 8/8.
+* The fact check scored all of these 100%. It cannot see cells in the wrong place or a damaged header.
+* "Extra rows" in table_scores.csv counts any row that is not in the answer key, including a header split over two rows. Check with `python scripts/score_tables.py --show TOOL FILE` before calling it an error.
+
+### 3b.2 Reading order [measured]
+
+Method: facts in data/ground_truth.json are listed in human reading order. scripts/reading_order.py finds where each fact appears and counts the largest number of facts that appear in the correct order; the others are reported as out of order. Results: results/reading_order.csv. Details: results/order_details/.
+
+* The only failure: MarkItDown on 03_two_column.pdf (8/9 in order). The right-column heading "Delta 9" appears inside the left-column paragraph about Orion Labs, so an AI could attach Orion Labs' facts to Delta 9. Docling and PyMuPDF4LLM pass. All tools pass on the DOCX.
+* Ground-truth correction: on the first run every tool failed on 02_table and 06_header_footer. The cause was the answer key, not the tools: two facts were listed in the wrong order ("16,050" and "renegotiated vendor contracts"). The order was corrected using the line numbers in the generator script (scripts/fix_ground_truth_order.py). The facts themselves did not change, so fact scores are unchanged.
+
+### 3b.3 Scanned page (07_scanned.pdf) [measured]
+
+What each tool returned in the main benchmark:
+
+| Tool | Characters returned | Facts | Note |
+|---|---|---|---|
+| MarkItDown | 0 | 0/6 | Empty output with no error or warning: a silent failure |
+| PyMuPDF4LLM | 138 | 5/6 | Wrote "AnnualSummary 2026" (space lost), so one fact did not match |
+| Docling (default settings) | 139 | 6/6 | Text complete and correct |
+
+Docling with OCR switched on explicitly, three settings, 3 repeats each, fresh process per repeat (scripts/ocr_compare.py; results/ocr_compare.csv; outputs and logs in results/ocr/):
+
+| Setting | Facts | First run s (mean) | Warm s (mean) | Peak MB (max) | Note |
+|---|---|---|---|---|---|
+| auto (Docling default) | 6/6 | 13.9 | 3.0 | 1371 | Log shows it uses RapidOCR (onnxruntime, PP-OCRv6 small models) |
+| RapidOCR, full-page OCR forced | 5/6 | 15.0 | 3.8 | 1493 | Title read as "AnnualSummary2026" |
+| EasyOCR, full-page OCR forced | 6/6 | 53.8 | 33.3 | 3125 | About 11x slower and 2x memory; stray "{" before "9,84,000" |
+
+* Docling's default OCR engine is RapidOCR [measured, results/ocr/docling_auto_run1_log.txt]. The same engine with full-page OCR forced lost the spaces in the title, so the setting matters, not only the engine. Why the default does better is not verified (it probably reads each detected text block separately).
+* PyMuPDF4LLM most likely also used RapidOCR [inferred: it is the only OCR engine installed, and it makes the same spacing error]. Not proven.
+* Tesseract was not tested (it needs a separate Windows installer).
+* scripts/ocr_compare.py measures slightly differently from the main benchmark (library import, about 18 s, is excluded), so compare times within this table only.
+* Empty output must be treated as an error in any pipeline: 0 characters from a non-empty file means OCR is needed or has failed.
+
+### 3b.4 Timing: model load, first run, warm run [measured]
+
+The benchmark records three times separately (results/runs.csv): model load (load_s), first document (first_s) and later documents (warm_s). MarkItDown's first run (0.05 s) is shorter than its model load (1.34 s), which shows that first_s does not include load_s. Tables now use the median of the repeats, so one slow repeat cannot distort a result.
+
+* Docling on PDFs: about 15 s model load + 25 s first document = about 40 s before the first result, then about 7 s per document. MarkItDown: about 1.4 s in total before the first result.
+* Day 1 oddities explained: Docling's 114.8 s first run on the scan was the mean of 25.1, 292.9 and 26.4 s (one slow repeat). The 19.9 s warm run on 06_header_footer.pdf was the mean of 8.9, 9.0 and 41.7 s; that slow repeat also used much more memory (1813 MB vs about 1000 MB). It was not a model download: the OCR model files were created at 12:03 and the benchmark started at 12:23 on 12 October (file dates). The cause of the slow repeats is unknown, probably background Windows activity [not verified].
+* Consequence: a parsing service must load Docling once at start-up and keep it in memory, not start a new process per request.
 
 ## 4. Observations (Day 1)
 
 1. Fact count alone does not separate the tools on digital documents: all three found 100% of facts in every digital file they could open. [measured, results/facts.csv]
 2. Structure does separate them. Only Docling (on the PDF) rebuilt the merged table header correctly ("Q3 2026 - July / Q3 2026 - August"). MarkItDown also pulled a sentence below the table into the table. On the two-column PDF, MarkItDown placed the "Delta 9" heading in the wrong position, yet still scored 100% on facts. A fact check misses structural errors. [measured, checked by eye, results/manual_checks.csv]
 3. Scanned page: MarkItDown 0/6 (returned empty text with no error), PyMuPDF4LLM 5/6, Docling 6/6. [measured, results/facts.csv] MarkItDown has no built-in OCR. [read, MarkItDown docs]
-4. Cost: on PDFs Docling is about 100x slower than MarkItDown (warm 4.2 s vs 0.043 s on 01_basic.pdf) and uses about 8x more memory (0.9-1.3 GB vs 115 MB). Each new process also pays about 15 s of model loading (estimated as first run minus warm run, not timed separately yet). [measured, results/summary.csv]
+4. Cost: on PDFs Docling is about 100x slower than MarkItDown (warm 4.2 s vs 0.043 s on 01_basic.pdf) and uses about 8x more memory (0.9-1.3 GB vs 115 MB). Each new process also pays about 15 s of model loading (load_s) and a slower first document. [measured, results/runs.csv; see 3b.4]
 5. Docling is fast on Word, PowerPoint and Excel files (under 0.2 s), because these formats already contain structure and no AI models are needed. [time measured, results/summary.csv; reason read from Docling docs]
 6. The original Office file is not always the best input: Docling handled the merged table header better from the PDF than from the DOCX, and Docling produced better slide headings from the slides PDF than from the PPTX (PyMuPDF4LLM cannot open PPTX, so for slides it was only tested on the PDF). [measured, checked by eye]
 7. Spreadsheets: both tools output the formula result (36450) and dropped thousands separators. MarkItDown keeps sheet names but writes "NaN" for empty cells; Docling loses sheet names. [measured, outputs in results/markitdown and results/docling]
@@ -118,15 +176,20 @@ Times are the mean of 3 runs. "unsupported" = the tool cannot read that format.
 * Office files (DOCX/PPTX/XLSX) and simple digital PDFs where speed matters: MarkItDown (MIT licence, fastest, lightest), but it must never be used alone on scanned documents. [speed and scan failure measured; licence read]
 * PDFs with complex tables, multi-column layouts, or scans: Docling (MIT licence), accepting higher time and memory cost. [quality, time and memory measured; licence read]
 * PyMuPDF4LLM: good quality and fast on PDFs, but PDF-only and AGPL-3.0 licensed, so it needs a commercial licence or full source disclosure for business use. [quality, speed and PDF-only measured; licence read]
+* Scanned documents: Docling with its default OCR (RapidOCR) found 6/6 facts in about 3 s warm. EasyOCR was as accurate but about 11x slower and needed 3 GB of memory. Treat empty output as an error. [measured, see 3b.3]
+* Services: load Docling once at start-up (about 40 s before the first result on this laptop) and keep it in memory. [measured, see 3b.4]
 
 ## 6. Limitations and open questions
 
 * Small test set (12 documents, plus scan.png as the source image; 1 page in most files); results may differ on long or real-world documents.
 * PDFs were exported with LibreOffice, not Microsoft Word.
 * CPU only; Docling would probably be faster with a GPU. [read, not tested]
-* Docling's first run on the scanned page (114.8 s) was much slower than warm (6.1 s); possibly one-time OCR model loading. To investigate.
-* Docling warm time on 06_header_footer.pdf (19.9 s) was unusually close to its first run; possibly an outlier or thermal throttling. To investigate.
-* PyMuPDF4LLM read the scan without Tesseract installed; which OCR engine it used still needs to be confirmed. [score measured; engine unknown]
+* Resolved on Day 2: Docling's 114.8 s first run on the scan was one slow repeat (292.9 s); results now use medians. Cause of the slow repeat unknown [not verified]. See 3b.4.
+* Resolved on Day 2: Docling's 19.9 s warm run on 06_header_footer.pdf was one slow repeat (41.7 s). See 3b.4.
+* PyMuPDF4LLM read the scan without Tesseract installed; it most likely used RapidOCR [inferred, see 3b.3], not proven.
+* OCR was tested on one clean, generated scan only; real scans (skewed, low resolution, handwriting) may give very different results.
+* Table and reading-order scores use exact text matching; the rules are in scripts/score_tables.py and scripts/reading_order.py.
+* Licences of EasyOCR, RapidOCR, Tesseract and Unstructured are listed as Apache-2.0 but still need to be verified.
 
 
 
