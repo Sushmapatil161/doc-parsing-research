@@ -1,0 +1,10 @@
+engine,repeat,status,facts_found,facts_total,missing,import_s,first_s,warm_s,peak_mb,same_output
+auto,1,ok,6,6,,17.51,14.33,2.93,1353,True
+auto,2,ok,6,6,,8.1,14.23,2.98,1112,True
+auto,3,ok,6,6,,8.16,13.07,2.98,1371,True
+rapidocr,1,ok,5,6,Annual Summary 2026,7.92,15.31,3.91,1059,True
+rapidocr,2,ok,5,6,Annual Summary 2026,8.7,15.75,3.8,1293,True
+rapidocr,3,ok,5,6,Annual Summary 2026,8.47,14.03,3.62,1493,True
+easyocr,1,ok,6,6,,8.88,47.58,29.11,3125,True
+easyocr,2,ok,6,6,,10.92,53.53,33.58,2964,True
+easyocr,3,ok,6,6,,13.24,60.4,37.23,2768,True

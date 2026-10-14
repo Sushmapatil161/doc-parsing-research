@@ -1,0 +1,11 @@
+C:\Users\sushm\projects\doc-parsing-research\.venv\lib\site-packages\torch\ao\nn\quantized\dynamic\modules\rnn.py:162: UserWarning: torch.quantize_per_tensor, torch.quantize_per_channel and other quantized tensor creation functions that produce tensors with dtype torch.quint8, torch.qint8, and torch.qint32 are deprecated and will be removed in a future PyTorch release. Please see https://github.com/pytorch/pytorch/issues/184982 for more information. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\quantized\Quantizer.cpp:116.)
+  w_ih = torch.quantize_per_tensor(
+
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]
+Loading weights:  23%|##2       | 177/770 [00:00<00:00, 1710.40it/s]
+Loading weights:  45%|####5     | 349/770 [00:00<00:00, 1332.14it/s]
+Loading weights: 100%|##########| 770/770 [00:00<00:00, 2546.97it/s]
+C:\Users\sushm\projects\doc-parsing-research\.venv\lib\site-packages\torch\utils\data\dataloader.py:759: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  super().__init__(loader)
+C:\Users\sushm\projects\doc-parsing-research\.venv\lib\site-packages\torch\utils\data\dataloader.py:759: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  super().__init__(loader)

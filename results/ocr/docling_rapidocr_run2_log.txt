@@ -1,0 +1,14 @@
+
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]
+Loading weights:  26%|##6       | 202/770 [00:00<00:00, 2013.27it/s]
+Loading weights:  52%|#####2    | 404/770 [00:00<00:00, 2016.96it/s]
+Loading weights: 100%|##########| 770/770 [00:00<00:00, 3078.27it/s]
+[32m[INFO] 2026-10-14 16:01:47,838 [RapidOCR] base.py:23: Using engine_name: onnxruntime[0m
+[32m[INFO] 2026-10-14 16:01:47,970 [RapidOCR] download_file.py:60: File exists and is valid: C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\PP-OCRv6_det_small.onnx[0m
+[32m[INFO] 2026-10-14 16:01:47,971 [RapidOCR] main.py:63: Using C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\PP-OCRv6_det_small.onnx[0m
+[32m[INFO] 2026-10-14 16:01:50,506 [RapidOCR] base.py:23: Using engine_name: onnxruntime[0m
+[32m[INFO] 2026-10-14 16:01:50,511 [RapidOCR] download_file.py:60: File exists and is valid: C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\ch_ppocr_mobile_v2.0_cls_mobile.onnx[0m
+[32m[INFO] 2026-10-14 16:01:50,511 [RapidOCR] main.py:63: Using C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\ch_ppocr_mobile_v2.0_cls_mobile.onnx[0m
+[32m[INFO] 2026-10-14 16:01:50,598 [RapidOCR] base.py:23: Using engine_name: onnxruntime[0m
+[32m[INFO] 2026-10-14 16:01:50,630 [RapidOCR] download_file.py:60: File exists and is valid: C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\PP-OCRv6_rec_small.onnx[0m
+[32m[INFO] 2026-10-14 16:01:50,631 [RapidOCR] main.py:63: Using C:\Users\sushm\projects\doc-parsing-research\.venv\Lib\site-packages\rapidocr\models\PP-OCRv6_rec_small.onnx[0m
