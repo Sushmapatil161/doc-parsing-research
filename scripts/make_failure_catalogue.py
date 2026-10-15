@@ -44,6 +44,11 @@ F = [
     ("docling", "21_irs_w9_p1.pdf", "wrong_order", "low",
      "Exempt payee code before Part I heading", "out of order (form columns, order debatable)",
      "[measured] results/reading_order.csv"),
+    ("pymupdf4llm", "13_scan_phone.pdf (real photo)", "empty_output", "high",
+     "6 facts", "0 characters, no warning: auto-detection skipped OCR; force_ocr=True gives 6/6",
+     "[measured] results/phone_photo.csv"),
+    ("docling + EasyOCR", "13_scan_phone.pdf (real photo)", "ocr_error", "medium",
+     "Kestrel Systems; 9,84,000", "both missing (4/6)", "[measured] results/phone_photo.csv"),
 ]
 
 rows = [{"id": i, "tool": t, "document": d, "failure_type": ft, "severity": s,

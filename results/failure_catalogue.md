@@ -14,17 +14,19 @@
 | 12 | pymupdf4llm | 21_irs_w9_p1.pdf | broken_table | high | Social security number | Social se\|curity number (form turned into a fake table, words cut at cell borders) | [measured] 2/6 facts; [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
 | 13 | pymupdf4llm | 21_irs_w9_p1.pdf | dropped_text | high | Give form to the requester. Do not send to the IRS. | 'send to the IRS.' missing; 'Print or type' -> 'rint or typ' | [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
 | 14 | docling | 21_irs_w9_p1.pdf | wrong_order | low | Exempt payee code before Part I heading | out of order (form columns, order debatable) | [measured] results/reading_order.csv |
+| 15 | pymupdf4llm | 13_scan_phone.pdf (real photo) | empty_output | high | 6 facts | 0 characters, no warning: auto-detection skipped OCR; force_ocr=True gives 6/6 | [measured] results/phone_photo.csv |
+| 16 | docling + EasyOCR | 13_scan_phone.pdf (real photo) | ocr_error | medium | Kestrel Systems; 9,84,000 | both missing (4/6) | [measured] results/phone_photo.csv |
 
 | Tool | Failures | of which high severity |
 |---|---|---|
-| docling | 4 | 2 |
+| docling | 5 | 2 |
 | markitdown | 4 | 1 |
-| pymupdf4llm | 6 | 4 |
+| pymupdf4llm | 7 | 5 |
 
 | Failure type | Count |
 |---|---|
-| empty_output | 5 |
+| empty_output | 6 |
+| ocr_error | 3 |
 | broken_table | 3 |
-| ocr_error | 2 |
 | wrong_order | 2 |
 | dropped_text | 2 |

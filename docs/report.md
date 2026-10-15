@@ -238,6 +238,22 @@ Source page: `07_scanned.pdf` (6 facts). One change at a time, each OCR setup ru
 * The 5/6 results are the lost space in "Annual Summary 2026" (read as "AnnualSummary"). One fact on one page decides 5 vs 6, so differences of one fact are noise.
 * Limitation: one page, one run per setup, simulated damage. A real phone photo is still to be added.
 
+### Real phone photo
+
+`13_scan_phone.pdf`: a phone photo of the laptop screen showing the PDF in Edge (no printer available), sent via WhatsApp (compressed), converted to PDF without EXIF data. Script: `scripts/score_phone_photo.py`; data: `results/phone_photo.csv`. One run per setup.
+
+| Setup | Facts found |
+|---|---|
+| MarkItDown | 0/6 |
+| Docling + RapidOCR | 6/6 |
+| Docling + RapidOCR, full-page OCR | 6/6 |
+| Docling + EasyOCR | 4/6 |
+| PyMuPDF4LLM (default) | **0/6, 0 characters** |
+| PyMuPDF4LLM, `force_ocr=True` | 6/6 |
+
+* **[measured]** The real photo reversed the simulated-scan result: PyMuPDF4LLM, the most robust tool in the sweep, returned nothing by default, with no error. Its log shows no "OCR on page" line, so its automatic check decided the page needed no OCR. With `force_ocr=True` it found 6/6.
+* Simulated scans flattered PyMuPDF4LLM: they are clean white pages, unlike a real photo. One real photo is a small sample; more real photos are needed.
+
 ## Real public-domain documents
 
 Five real documents, cut to 1-3 pages: IRS Form W-9 (p1), IRS Form 1040 (p1), CDC MMWR Vol. 74 No. 14 (p1-3), a CDC supplementary table (p1), and a 1958 NASA report (pages 24, 38, 259). Sources, licences and SHA-256 hashes: `data/real/SOURCES.csv`. Facts were typed by hand from the visible page, not copied from the text layer (`scripts/add_real_ground_truth.py`; 19 facts for W-9, MMWR and the CDC table). The 1040 and NASA documents have no facts yet.
@@ -267,18 +283,20 @@ Script: `scripts/make_failure_catalogue.py`; data: `results/failure_catalogue.cs
 | 12 | pymupdf4llm | 21_irs_w9_p1.pdf | broken_table | high | Social security number | Social se\|curity number (form turned into a fake table, words cut at cell borders) | [measured] 2/6 facts; [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
 | 13 | pymupdf4llm | 21_irs_w9_p1.pdf | dropped_text | high | Give form to the requester. Do not send to the IRS. | 'send to the IRS.' missing; 'Print or type' -> 'rint or typ' | [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
 | 14 | docling | 21_irs_w9_p1.pdf | wrong_order | low | Exempt payee code before Part I heading | out of order (form columns, order debatable) | [measured] results/reading_order.csv |
+| 15 | pymupdf4llm | 13_scan_phone.pdf (real photo) | empty_output | high | 6 facts | 0 characters, no warning: auto-detection skipped OCR; force_ocr=True gives 6/6 | [measured] results/phone_photo.csv |
+| 16 | docling + EasyOCR | 13_scan_phone.pdf (real photo) | ocr_error | medium | Kestrel Systems; 9,84,000 | both missing (4/6) | [measured] results/phone_photo.csv |
 
 | Tool | Failures | of which high severity |
 |---|---|---|
-| docling | 4 | 2 |
+| docling | 5 | 2 |
 | markitdown | 4 | 1 |
-| pymupdf4llm | 6 | 4 |
+| pymupdf4llm | 7 | 5 |
 
 | Failure type | Count |
 |---|---|
-| empty_output | 5 |
+| empty_output | 6 |
+| ocr_error | 3 |
 | broken_table | 3 |
-| ocr_error | 2 |
 | wrong_order | 2 |
 | dropped_text | 2 |
 
@@ -323,14 +341,14 @@ Rule: accuracy first; if tied, the faster tool; licence as a final check. Number
 | Two-column PDF | PyMuPDF4LLM | Order 2/2 (MarkItDown 1/2); 0.84 s vs Docling 5.62 s | Docling (2/2) |
 | PDF with header/footer | MarkItDown | All 5/5; fastest | Same |
 | PDF form | Docling | 6/6 facts vs 5/6, 2/6 | Same |
-| Scanned PDF | PyMuPDF4LLM | 17/18 vs 18/18 (one lost space), but 6/6 at 12, 20 degrees and 36 dpi where Docling got 0/6; 2.16 s vs 3.21 s | Docling, only for straight, clear scans |
+| Scanned PDF | Docling + RapidOCR (default) for normal scans and photos; PyMuPDF4LLM with `force_ocr=True` for badly tilted or very low-resolution pages | Docling: 18/18 on benchmark scans and 6/6 on the real phone photo. PyMuPDF4LLM by default: 0/6 on the real photo (OCR silently skipped), but with force_ocr=True 6/6; it also read 6/6 at 12, 20 degrees and 36 dpi where Docling got 0/6 (sweep run with default settings; force_ocr not yet tested on the sweep) | Docling only, and flag tilted or low-resolution pages for review |
 | Word (.docx) | Docling | Table cells 88% vs 75% | Same |
 | Slides (.pptx) | Tie | Both 8/8, 100% table cells | Same |
 | Spreadsheet (.xlsx) | Docling (narrowly) | Table cells 86% vs 84% | Same |
 
 Caveats: 1-3 documents per type, so one-fact or few-percent differences are not reliable; PDF table cell scores come from `02_table.pdf` only; licences as recorded in section 1 (to verify). Always run `check_text_layer.py` first: MarkItDown returns empty output on scans with no warning (0/18).
 
-Proposed routing for the parsing service: image-only PDF -> PyMuPDF4LLM with OCR; Word, slides, spreadsheets -> Docling; digital PDF -> MarkItDown, or Docling if it contains tables or forms.
+Proposed routing for the parsing service: image-only PDF -> Docling + RapidOCR; if the output is only `<!-- image -->` or nearly empty, retry with PyMuPDF4LLM `force_ocr=True` (each covers the other's silent failure: Docling on tilted or tiny pages, PyMuPDF4LLM on the real photo). Word, slides, spreadsheets -> Docling; digital PDF -> MarkItDown, or Docling if it contains tables or forms. Never accept empty output without a check: every empty_output failure in the catalogue came with no error or warning.
 
 ## Reproducibility notes
 

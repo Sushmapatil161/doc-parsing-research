@@ -1,0 +1,7 @@
+engine,found,total,chars,seconds,missing
+markitdown,0,6,0,0.03,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr,6,6,181,20.01,
+docling_rapidocr_fullpage,6,6,181,8.8,
+docling_easyocr,4,6,127,57.76,"Kestrel Systems; 9,84,000"
+pymupdf4llm,0,6,0,1.87,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+pymupdf4llm_force_ocr,6,6,261,3.19,
