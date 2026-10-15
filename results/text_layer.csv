@@ -5,3 +5,5 @@ file,pages,text_pages,scan_like_pages,verdict
 04_slides.pdf,4,4,0,TEXT: no OCR needed
 06_header_footer.pdf,3,3,0,TEXT: no OCR needed
 07_scanned.pdf,1,0,1,IMAGE_ONLY: send to OCR
+14_scan_tilted.pdf,1,0,1,IMAGE_ONLY: send to OCR
+15_scan_lowres.pdf,1,0,1,IMAGE_ONLY: send to OCR

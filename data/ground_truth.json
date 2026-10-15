@@ -1,9 +1,92 @@
 {
-  "01_basic": ["Project Falcon", "QX-7741", "35 percent", "Orbit dashboard", "120 staff", "March 2026", "Pune office", "December 2026"],
-  "02_table": ["Zentrix Corp", "Q3 2026", "Bengaluru Office", "48,213", "16,050", "Mumbai Office", "39,870", "Delhi Office", "27,645"],
-  "03_two_column": ["Orion Labs", "Mysuru", "42 researchers", "Helios", "Hubballi", "Delta 9", "Chennai", "3,400 customers", "Meera Rao"],
-  "04_slides": ["Nimbus Product Launch", "Team Kestrel", "1,250 units", "Hyderabad", "Arjun Mehta", "Priya Nair", "1,299", "Enterprise"],
-  "05_sheet": ["INV-5582", "Sparrow Traders", "Lotus Foods", "Banyan Tech", "Kavya Iyer", "Finance", "Anita Kulkarni"],
-  "06_header_footer": ["Nimbus Ltd", "Rohan Das", "renegotiated vendor contracts", "2,15,000", "14 January 2027"],
-  "07_scanned": ["Annual Summary 2026", "Kestrel Systems", "9,84,000", "Coimbatore", "5 May 2026", "SCN-3309"]
+  "01_basic": [
+    "Project Falcon",
+    "QX-7741",
+    "35 percent",
+    "Orbit dashboard",
+    "120 staff",
+    "March 2026",
+    "Pune office",
+    "December 2026"
+  ],
+  "02_table": [
+    "Zentrix Corp",
+    "Q3 2026",
+    "Bengaluru Office",
+    "48,213",
+    "16,050",
+    "Mumbai Office",
+    "39,870",
+    "Delhi Office",
+    "27,645"
+  ],
+  "03_two_column": [
+    "Orion Labs",
+    "Mysuru",
+    "42 researchers",
+    "Helios",
+    "Hubballi",
+    "Delta 9",
+    "Chennai",
+    "3,400 customers",
+    "Meera Rao"
+  ],
+  "04_slides": [
+    "Nimbus Product Launch",
+    "Team Kestrel",
+    "1,250 units",
+    "Hyderabad",
+    "Arjun Mehta",
+    "Priya Nair",
+    "1,299",
+    "Enterprise"
+  ],
+  "05_sheet": [
+    "INV-5582",
+    "Sparrow Traders",
+    "Lotus Foods",
+    "Banyan Tech",
+    "Kavya Iyer",
+    "Finance",
+    "Anita Kulkarni"
+  ],
+  "06_header_footer": [
+    "Nimbus Ltd",
+    "Rohan Das",
+    "renegotiated vendor contracts",
+    "2,15,000",
+    "14 January 2027"
+  ],
+  "07_scanned": [
+    "Annual Summary 2026",
+    "Kestrel Systems",
+    "9,84,000",
+    "Coimbatore",
+    "5 May 2026",
+    "SCN-3309"
+  ],
+  "13_scan_phone": [
+    "Annual Summary 2026",
+    "Kestrel Systems",
+    "9,84,000",
+    "Coimbatore",
+    "5 May 2026",
+    "SCN-3309"
+  ],
+  "14_scan_tilted": [
+    "Annual Summary 2026",
+    "Kestrel Systems",
+    "9,84,000",
+    "Coimbatore",
+    "5 May 2026",
+    "SCN-3309"
+  ],
+  "15_scan_lowres": [
+    "Annual Summary 2026",
+    "Kestrel Systems",
+    "9,84,000",
+    "Coimbatore",
+    "5 May 2026",
+    "SCN-3309"
+  ]
 }
