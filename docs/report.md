@@ -148,7 +148,7 @@ Docling with OCR switched on explicitly, three settings, 3 repeats each, fresh p
 | EasyOCR, full-page OCR forced | 6/6 | 53.8 | 33.3 | 3125 | About 11x slower and 2x memory; stray "{" before "9,84,000" |
 
 * Docling's default OCR engine is RapidOCR [measured, results/ocr/docling_auto_run1_log.txt]. The same engine with full-page OCR forced lost the spaces in the title, so the setting matters, not only the engine. Why the default does better is not verified (it probably reads each detected text block separately).
-* PyMuPDF4LLM most likely also used RapidOCR [inferred: it is the only OCR engine installed, and it makes the same spacing error]. Not proven.
+* PyMuPDF4LLM used RapidOCR [measured]: with `use_ocr=False` it found 0/6 facts (0 characters, no error or warning, 0.19 s); with the default `use_ocr=True` it found 5/6 (5.79 s) and printed "Using RapidOCR for OCR processing". In the source, `select_ocr_function()` in `helpers/document_layout.py` picks RapidOCR when the `rapidocr` package is installed [read]. Scripts: `scripts/noocr_test.py`, `scripts/count_noocr_facts.py`; data: `results/noocr_facts.csv`.
 * Tesseract was not tested (it needs a separate Windows installer).
 * scripts/ocr_compare.py measures slightly differently from the main benchmark (library import, about 18 s, is excluded), so compare times within this table only.
 * Empty output must be treated as an error in any pipeline: 0 characters from a non-empty file means OCR is needed or has failed.
@@ -186,7 +186,7 @@ The benchmark records three times separately (results/runs.csv): model load (loa
 * CPU only; Docling would probably be faster with a GPU. [read, not tested]
 * Resolved on Day 2: Docling's 114.8 s first run on the scan was one slow repeat (292.9 s); results now use medians. Cause of the slow repeat unknown [not verified]. See 3b.4.
 * Resolved on Day 2: Docling's 19.9 s warm run on 06_header_footer.pdf was one slow repeat (41.7 s). See 3b.4.
-* PyMuPDF4LLM read the scan without Tesseract installed; it most likely used RapidOCR [inferred, see 3b.3], not proven.
+* PyMuPDF4LLM read the scan without Tesseract installed because it used RapidOCR [measured, see 3b.3]. If no OCR engine is installed, it skips OCR silently [read: `select_ocr_function()` returns None], which gives empty output on scans. `scripts/check_text_layer.py` now flags image-only PDFs before parsing.
 * OCR was tested on one clean, generated scan only; real scans (skewed, low resolution, handwriting) may give very different results.
 * Table and reading-order scores use exact text matching; the rules are in scripts/score_tables.py and scripts/reading_order.py.
 * Licences of EasyOCR, RapidOCR, Tesseract and Unstructured are listed as Apache-2.0 but still need to be verified.
