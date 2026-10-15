@@ -238,6 +238,100 @@ Source page: `07_scanned.pdf` (6 facts). One change at a time, each OCR setup ru
 * The 5/6 results are the lost space in "Annual Summary 2026" (read as "AnnualSummary"). One fact on one page decides 5 vs 6, so differences of one fact are noise.
 * Limitation: one page, one run per setup, simulated damage. A real phone photo is still to be added.
 
+## Real public-domain documents
+
+Five real documents, cut to 1-3 pages: IRS Form W-9 (p1), IRS Form 1040 (p1), CDC MMWR Vol. 74 No. 14 (p1-3), a CDC supplementary table (p1), and a 1958 NASA report (pages 24, 38, 259). Sources, licences and SHA-256 hashes: `data/real/SOURCES.csv`. Facts were typed by hand from the visible page, not copied from the text layer (`scripts/add_real_ground_truth.py`; 19 facts for W-9, MMWR and the CDC table). The 1040 and NASA documents have no facts yet.
+
+* **[measured]** On the two-column MMWR, all three tools found 7/7 facts and kept the correct reading order, including the jump from the bottom of the left column to the top of the right. Real two-column text was handled better than expected.
+* **[measured]** On the W-9 form, PyMuPDF4LLM found only 2/6 facts. **[read]** It turned the whole form into a table: some text is only split by `<br>` inside cells (a matching effect, the words are present), but other text is damaged: words are cut at cell borders ("Social se|curity number"), characters are lost ("rint or typ"), and "send to the IRS." is missing. Open question for the mentor: should `normalise()` treat `<br>` as a space?
+* **[measured]** MarkItDown missed only the rotated margin text "Print or type" on the W-9 (5/6). Docling found 6/6 but failed reading order on the form; on a form with side-by-side boxes the correct order is debatable.
+* **[measured]** `check_text_layer.py` flagged the NASA report as SCAN_WITH_TEXT_LAYER: an old scan with an invisible OCR text layer. The quality of that old text layer has not been checked yet.
+
+## Failure catalogue
+
+Script: `scripts/make_failure_catalogue.py`; data: `results/failure_catalogue.csv`. The counts show what was tested, not which tool is worst: PyMuPDF4LLM was tested more deeply on Day 3, and two of its high-severity entries are setup risks (OCR switched off, no OCR engine installed), not failures under default settings.
+
+| # | Tool | Document | Type | Severity | Expected | Got | Evidence |
+|---|---|---|---|---|---|---|---|
+| 1 | markitdown | 07_scanned.pdf, 14_scan_tilted.pdf, 15_scan_lowres.pdf | empty_output | high | 6 facts | 0 facts, no OCR for PDFs, no warning | [measured] results/facts.csv |
+| 2 | pymupdf4llm | 07_scanned.pdf (use_ocr=False) | empty_output | high | 6 facts | 0 characters, no warning | [measured] results/noocr_facts.csv |
+| 3 | pymupdf4llm | any scan, no OCR engine installed | empty_output | high | OCR text | OCR skipped silently | [read] select_ocr_function() returns None |
+| 4 | pymupdf4llm | 07_scanned.pdf | ocr_error | low | Annual Summary 2026 | AnnualSummary 2026 | [measured] results/facts.csv |
+| 5 | docling (RapidOCR, EasyOCR, full-page OCR) | sweep tilt_12.pdf, tilt_20.pdf | empty_output | high | 6 facts | <!-- image --> only (0/6), no warning | [measured] results/sweep.csv |
+| 6 | docling (RapidOCR, EasyOCR, full-page OCR) | sweep dpi_036.pdf | empty_output | high | 6 facts | <!-- image --> only (0/6), no warning | [measured] results/sweep.csv |
+| 7 | docling + EasyOCR | sweep tilt_08.pdf, dpi_050.pdf | ocr_error | medium | 6 facts | 3/6 and 2/6 facts | [measured] results/sweep.csv |
+| 8 | markitdown | 02_table.docx | broken_table | medium | 4 header cells | 0/4 header cells correct (merged header cells) | [measured] results/table_scores.csv |
+| 9 | pymupdf4llm | 02_table.pdf | broken_table | medium | 4 header cells | 1/4 header cells correct | [measured] results/table_scores.csv |
+| 10 | markitdown | 03_two_column.pdf | wrong_order | medium | heading before its column text | heading placed in the wrong position (Day 2) | [measured] results/reading_order.csv |
+| 11 | markitdown | 21_irs_w9_p1.pdf | dropped_text | medium | Print or type | missing (rotated margin text) | [measured] results/facts.csv |
+| 12 | pymupdf4llm | 21_irs_w9_p1.pdf | broken_table | high | Social security number | Social se\|curity number (form turned into a fake table, words cut at cell borders) | [measured] 2/6 facts; [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
+| 13 | pymupdf4llm | 21_irs_w9_p1.pdf | dropped_text | high | Give form to the requester. Do not send to the IRS. | 'send to the IRS.' missing; 'Print or type' -> 'rint or typ' | [read] results/pymupdf4llm/21_irs_w9_p1.pdf.md |
+| 14 | docling | 21_irs_w9_p1.pdf | wrong_order | low | Exempt payee code before Part I heading | out of order (form columns, order debatable) | [measured] results/reading_order.csv |
+
+| Tool | Failures | of which high severity |
+|---|---|---|
+| docling | 4 | 2 |
+| markitdown | 4 | 1 |
+| pymupdf4llm | 6 | 4 |
+
+| Failure type | Count |
+|---|---|
+| empty_output | 5 |
+| broken_table | 3 |
+| ocr_error | 2 |
+| wrong_order | 2 |
+| dropped_text | 2 |
+
+## Recommendation
+
+Rule: accuracy first; if tied, the faster tool; licence as a final check. Numbers per document type (`scripts/make_recommendation_inputs.py`, `results/by_doc_type.md`):
+
+| Document type | Tool | Facts found | Reading order PASS | Table cells | Median warm s |
+|---|---|---|---|---|---|
+| Digital PDF, simple | markitdown | 8/8 | 1/1 | - | 0.03 |
+| Digital PDF, simple | docling | 8/8 | 1/1 | - | 2.02 |
+| Digital PDF, simple | pymupdf4llm | 8/8 | 1/1 | - | 0.22 |
+| PDF with tables | markitdown | 15/15 | 2/2 | 88% | 0.11 |
+| PDF with tables | docling | 15/15 | 2/2 | 94% | 8.54 |
+| PDF with tables | pymupdf4llm | 15/15 | 2/2 | 81% | 0.35 |
+| Two-column PDF | markitdown | 16/16 | 1/2 | - | 1.08 |
+| Two-column PDF | docling | 16/16 | 2/2 | - | 5.62 |
+| Two-column PDF | pymupdf4llm | 16/16 | 2/2 | - | 0.84 |
+| PDF with header/footer | markitdown | 5/5 | 1/1 | - | 0.06 |
+| PDF with header/footer | docling | 5/5 | 1/1 | - | 4.56 |
+| PDF with header/footer | pymupdf4llm | 5/5 | 1/1 | - | 0.51 |
+| PDF form | markitdown | 5/6 | 1/1 | - | 0.48 |
+| PDF form | docling | 6/6 | 0/1 | - | 11.54 |
+| PDF form | pymupdf4llm | 2/6 | 1/1 | - | 1.50 |
+| Scanned PDF | markitdown | 0/18 | 0/- | - | 0.01 |
+| Scanned PDF | docling | 18/18 | 3/3 | - | 3.21 |
+| Scanned PDF | pymupdf4llm | 17/18 | 3/3 | - | 2.16 |
+| Word (.docx) | markitdown | 31/31 | 4/4 | 75% | 0.03 |
+| Word (.docx) | docling | 31/31 | 4/4 | 88% | 0.04 |
+| Word (.docx) | pymupdf4llm | unsupported | | | |
+| Slides (.pptx) | markitdown | 8/8 | 1/1 | 100% | 0.02 |
+| Slides (.pptx) | docling | 8/8 | 1/1 | 100% | 0.03 |
+| Slides (.pptx) | pymupdf4llm | unsupported | | | |
+| Spreadsheet (.xlsx) | markitdown | 7/7 | 1/1 | 84% | 0.03 |
+| Spreadsheet (.xlsx) | docling | 7/7 | 1/1 | 86% | 0.02 |
+| Spreadsheet (.xlsx) | pymupdf4llm | unsupported | | | |
+
+| Document type | Best tool | Why | If AGPL is not acceptable |
+|---|---|---|---|
+| Digital PDF, simple | MarkItDown | All 8/8; fastest (0.03 s vs 0.22 s, 2.02 s) | Same |
+| PDF with tables | Docling | Table cells 94% vs 88%, 81% (8.5 s vs 0.1 s) | Same |
+| Two-column PDF | PyMuPDF4LLM | Order 2/2 (MarkItDown 1/2); 0.84 s vs Docling 5.62 s | Docling (2/2) |
+| PDF with header/footer | MarkItDown | All 5/5; fastest | Same |
+| PDF form | Docling | 6/6 facts vs 5/6, 2/6 | Same |
+| Scanned PDF | PyMuPDF4LLM | 17/18 vs 18/18 (one lost space), but 6/6 at 12, 20 degrees and 36 dpi where Docling got 0/6; 2.16 s vs 3.21 s | Docling, only for straight, clear scans |
+| Word (.docx) | Docling | Table cells 88% vs 75% | Same |
+| Slides (.pptx) | Tie | Both 8/8, 100% table cells | Same |
+| Spreadsheet (.xlsx) | Docling (narrowly) | Table cells 86% vs 84% | Same |
+
+Caveats: 1-3 documents per type, so one-fact or few-percent differences are not reliable; PDF table cell scores come from `02_table.pdf` only; licences as recorded in section 1 (to verify). Always run `check_text_layer.py` first: MarkItDown returns empty output on scans with no warning (0/18).
+
+Proposed routing for the parsing service: image-only PDF -> PyMuPDF4LLM with OCR; Word, slides, spreadsheets -> Docling; digital PDF -> MarkItDown, or Docling if it contains tables or forms.
+
 ## Reproducibility notes
 
 * **[measured]** On Day 3 the full benchmark was re-run (all documents, 3 repeats) to include the new scans. Fact counts and reading-order results for all Day 1 documents were identical; timings differ slightly, as expected. Day 2 results are kept under the git tag `before-day3-benchmark`.
