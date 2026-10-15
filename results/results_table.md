@@ -1,47 +1,62 @@
 
 |Document|Tool|Status|Model load (s)|First run (s)|Warm run (s)|Peak RAM (MB)|Facts found|Table cells (auto)|Reading order (auto)|Table intact (by eye)|Reading order (by eye)|
 |-|-|-|-|-|-|-|-|-|-|-|-|
-|01_basic.docx|markitdown|ok|1.29|0.029|0.025|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.docx|markitdown|ok|1.38|0.027|0.027|115|8/8 (100%)|n/a|PASS|n/a|Yes|
 |01_basic.docx|pymupdf4llm|unsupported||||||||||
-|01_basic.docx|docling|ok|7.19|0.125|0.041|324|8/8 (100%)|n/a|PASS|n/a|Yes|
-|01_basic.pdf|markitdown|ok|1.30|0.043|0.038|115|8/8 (100%)|n/a|PASS|n/a|Yes|
-|01_basic.pdf|pymupdf4llm|ok|0.79|1.008|0.206|311|8/8 (100%)|n/a|PASS|n/a|Yes|
-|01_basic.pdf|docling|ok|9.05|11.379|2.178|914|8/8 (100%)|n/a|PASS|n/a|Yes|
-|02_table.docx|markitdown|ok|1.26|0.059|0.052|115|9/9 (100%)|12/16 (75%)|PASS|Partial|Yes|
+|01_basic.docx|docling|ok|6.92|0.070|0.037|324|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|markitdown|ok|1.27|0.032|0.029|115|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|pymupdf4llm|ok|0.81|0.935|0.200|311|8/8 (100%)|n/a|PASS|n/a|Yes|
+|01_basic.pdf|docling|ok|9.57|11.332|2.098|1045|8/8 (100%)|n/a|PASS|n/a|Yes|
+|02_table.docx|markitdown|ok|1.27|0.056|0.048|115|9/9 (100%)|12/16 (75%)|PASS|Partial|Yes|
 |02_table.docx|pymupdf4llm|unsupported||||||||||
-|02_table.docx|docling|ok|7.04|0.093|0.042|324|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
-|02_table.pdf|markitdown|ok|1.27|0.040|0.037|115|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
-|02_table.pdf|pymupdf4llm|ok|0.80|1.039|0.273|312|9/9 (100%)|13/16 (81%)|PASS|Partial|Yes|
-|02_table.pdf|docling|ok|9.17|15.802|4.683|747|9/9 (100%)|15/16 (94%)|PASS|Yes|Yes|
-|03_two_column.docx|markitdown|ok|1.26|0.028|0.026|115|9/9 (100%)|n/a|PASS|n/a|Yes|
+|02_table.docx|docling|ok|6.48|0.076|0.039|324|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|markitdown|ok|1.31|0.035|0.032|115|9/9 (100%)|14/16 (88%)|PASS|Partial|Yes|
+|02_table.pdf|pymupdf4llm|ok|0.79|1.040|0.256|312|9/9 (100%)|13/16 (81%)|PASS|Partial|Yes|
+|02_table.pdf|docling|ok|7.30|11.817|3.208|1045|9/9 (100%)|15/16 (94%)|PASS|Yes|Yes|
+|03_two_column.docx|markitdown|ok|1.28|0.026|0.025|115|9/9 (100%)|n/a|PASS|n/a|Yes|
 |03_two_column.docx|pymupdf4llm|unsupported||||||||||
-|03_two_column.docx|docling|ok|7.11|0.093|0.034|323|9/9 (100%)|n/a|PASS|n/a|Yes|
-|03_two_column.pdf|markitdown|ok|1.25|0.063|0.058|115|9/9 (100%)|n/a|FAIL: Delta 9|n/a|Partial|
-|03_two_column.pdf|pymupdf4llm|ok|0.80|1.012|0.232|311|9/9 (100%)|n/a|PASS|n/a|Yes|
-|03_two_column.pdf|docling|ok|9.56|11.453|2.316|690|9/9 (100%)|n/a|PASS|n/a|Yes|
-|04_slides.pdf|markitdown|ok|1.40|0.049|0.047|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
-|04_slides.pdf|pymupdf4llm|ok|0.81|1.468|0.815|311|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
-|04_slides.pdf|docling|ok|9.27|17.464|8.653|958|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
-|04_slides.pptx|markitdown|ok|1.23|0.024|0.017|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|03_two_column.docx|docling|ok|7.00|0.100|0.029|324|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|markitdown|ok|1.29|0.060|0.054|115|9/9 (100%)|n/a|FAIL: Delta 9|n/a|Partial|
+|03_two_column.pdf|pymupdf4llm|ok|0.78|1.002|0.254|311|9/9 (100%)|n/a|PASS|n/a|Yes|
+|03_two_column.pdf|docling|ok|8.86|11.130|2.070|1005|9/9 (100%)|n/a|PASS|n/a|Yes|
+|04_slides.pdf|markitdown|ok|1.29|0.044|0.036|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|pymupdf4llm|ok|0.83|1.570|0.791|311|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pdf|docling|ok|9.17|17.034|6.516|1176|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|04_slides.pptx|markitdown|ok|1.27|0.021|0.016|115|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
 |04_slides.pptx|pymupdf4llm|unsupported||||||||||
-|04_slides.pptx|docling|ok|6.84|0.092|0.020|325|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
-|05_sheet.xlsx|markitdown|ok|1.25|0.037|0.026|115|7/7 (100%)|18/23 (78%)|PASS|Yes|Yes|
+|04_slides.pptx|docling|ok|7.32|0.074|0.025|325|8/8 (100%)|12/12 (100%)|PASS|Yes|Yes|
+|05_sheet.xlsx|markitdown|ok|1.25|0.034|0.026|115|7/7 (100%)|18/23 (78%)|PASS|Yes|Yes|
 |05_sheet.xlsx|pymupdf4llm|unsupported||||||||||
-|05_sheet.xlsx|docling|ok|6.64|0.083|0.013|323|7/7 (100%)|19/23 (83%)|PASS|Yes|Yes|
-|06_header_footer.docx|markitdown|ok|1.28|0.031|0.027|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|05_sheet.xlsx|docling|ok|12.93|0.103|0.019|323|7/7 (100%)|19/23 (83%)|PASS|Yes|Yes|
+|06_header_footer.docx|markitdown|ok|1.29|0.023|0.021|115|5/5 (100%)|n/a|PASS|n/a|Yes|
 |06_header_footer.docx|pymupdf4llm|unsupported||||||||||
-|06_header_footer.docx|docling|ok|6.86|0.083|0.035|323|5/5 (100%)|n/a|PASS|n/a|Yes|
-|06_header_footer.pdf|markitdown|ok|1.34|0.054|0.065|115|5/5 (100%)|n/a|PASS|n/a|Yes|
-|06_header_footer.pdf|pymupdf4llm|ok|0.80|1.238|0.500|312|5/5 (100%)|n/a|PASS|n/a|Yes|
-|06_header_footer.pdf|docling|ok|9.64|15.796|6.108|796|5/5 (100%)|n/a|PASS|n/a|Yes|
-|07_scanned.pdf|markitdown|ok|1.32|0.013|0.007|115|0/6 (0%)|n/a|n/a|n/a|n/a|
-|07_scanned.pdf|pymupdf4llm|ok|0.82|3.329|1.987|664|5/6 (83%)|n/a|PASS|n/a|Yes|
-|07_scanned.pdf|docling|ok|9.65|13.983|3.932|1006|6/6 (100%)|n/a|PASS|n/a|Yes|
-|14_scan_tilted.pdf|markitdown|ok|1.31|0.014|0.010|115|0/6 (0%)|n/a|n/a|?|?|
-|14_scan_tilted.pdf|pymupdf4llm|ok|0.86|3.841|2.667|701|6/6 (100%)|n/a|PASS|?|?|
-|14_scan_tilted.pdf|docling|ok|8.54|13.944|3.022|982|6/6 (100%)|n/a|PASS|?|?|
-|15_scan_lowres.pdf|markitdown|ok|1.27|0.010|0.007|115|0/6 (0%)|n/a|n/a|?|?|
-|15_scan_lowres.pdf|pymupdf4llm|ok|0.81|3.270|2.009|658|6/6 (100%)|n/a|PASS|?|?|
-|15_scan_lowres.pdf|docling|ok|9.12|14.277|2.999|1045|6/6 (100%)|n/a|PASS|?|?|
+|06_header_footer.docx|docling|ok|8.03|0.096|0.036|324|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|markitdown|ok|1.28|0.061|0.057|115|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|pymupdf4llm|ok|0.88|1.287|0.516|311|5/5 (100%)|n/a|PASS|n/a|Yes|
+|06_header_footer.pdf|docling|ok|9.35|15.338|4.526|725|5/5 (100%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|markitdown|ok|1.35|0.012|0.009|115|0/6 (0%)|n/a|n/a|n/a|n/a|
+|07_scanned.pdf|pymupdf4llm|ok|0.87|3.500|2.099|662|5/6 (83%)|n/a|PASS|n/a|Yes|
+|07_scanned.pdf|docling|ok|9.58|16.243|3.379|878|6/6 (100%)|n/a|PASS|n/a|Yes|
+|14_scan_tilted.pdf|markitdown|ok|1.29|0.013|0.009|115|0/6 (0%)|n/a|n/a|?|?|
+|14_scan_tilted.pdf|pymupdf4llm|ok|0.81|3.680|2.210|739|6/6 (100%)|n/a|PASS|?|?|
+|14_scan_tilted.pdf|docling|ok|9.29|14.112|3.348|930|6/6 (100%)|n/a|PASS|?|?|
+|15_scan_lowres.pdf|markitdown|ok|1.28|0.014|0.009|115|0/6 (0%)|n/a|n/a|?|?|
+|15_scan_lowres.pdf|pymupdf4llm|ok|0.85|3.273|1.951|658|6/6 (100%)|n/a|PASS|?|?|
+|15_scan_lowres.pdf|docling|ok|9.00|14.858|3.012|925|6/6 (100%)|n/a|PASS|?|?|
+|21_irs_w9_p1.pdf|markitdown|ok|1.33|0.440|0.478|126|5/6 (83%)|n/a|PASS|?|?|
+|21_irs_w9_p1.pdf|pymupdf4llm|ok|0.83|2.027|1.483|318|2/6 (33%)|n/a|PASS|?|?|
+|21_irs_w9_p1.pdf|docling|ok|8.80|23.061|11.535|1274|6/6 (100%)|n/a|FAIL: Exempt payee code (if any); Taxpayer Identification Number (TIN)|?|?|
+|22_irs_1040_p1.pdf|markitdown|ok|1.32|1.332|1.735|136||n/a|n/a|?|?|
+|22_irs_1040_p1.pdf|pymupdf4llm|ok|0.82|2.441|1.956|326||n/a|n/a|?|?|
+|22_irs_1040_p1.pdf|docling|ok|8.96|15.059|4.641|1034||n/a|n/a|?|?|
+|23_cdc_mmwr_p1-3.pdf|markitdown|ok|1.29|1.638|2.072|130|7/7 (100%)|n/a|PASS|?|?|
+|23_cdc_mmwr_p1-3.pdf|pymupdf4llm|ok|0.85|1.994|1.437|320|7/7 (100%)|n/a|PASS|?|?|
+|23_cdc_mmwr_p1-3.pdf|docling|ok|9.36|18.849|9.025|1373|7/7 (100%)|n/a|PASS|?|?|
+|24_cdc_table_p1.pdf|markitdown|ok|1.31|0.201|0.184|118|6/6 (100%)|n/a|PASS|?|?|
+|24_cdc_table_p1.pdf|pymupdf4llm|ok|0.78|1.237|0.431|314|6/6 (100%)|n/a|PASS|?|?|
+|24_cdc_table_p1.pdf|docling|ok|8.11|22.747|12.896|1045|6/6 (100%)|n/a|PASS|?|?|
+|25_nasa_scan.pdf|markitdown|ok|1.28|0.103|0.083|115||n/a|n/a|?|?|
+|25_nasa_scan.pdf|pymupdf4llm|ok|0.84|2.416|2.041|340||n/a|n/a|?|?|
+|25_nasa_scan.pdf|docling|ok|9.90|30.946|18.126|1336||n/a|n/a|?|?|
 
 Generated by scripts/make_results_table.py. Do not edit by hand. [measured] Times: median of the repeats in results/runs.csv. Facts: results/facts.csv. Table cells: cell-by-cell against data/expected_tables (scripts/score_tables.py; for 05_sheet.xlsx both sheets are added together). Reading order: scripts/reading_order.py (FAIL names the out-of-order fact). By-eye columns: Day 1 manual ratings in results/manual_checks.csv. n/a = the document has no table.

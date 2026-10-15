@@ -13,6 +13,9 @@ markitdown,06_header_footer.pdf,5,5,100,
 markitdown,07_scanned.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
 markitdown,14_scan_tilted.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
 markitdown,15_scan_lowres.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+markitdown,21_irs_w9_p1.pdf,5,6,83,Print or type
+markitdown,23_cdc_mmwr_p1-3.pdf,7,7,100,
+markitdown,24_cdc_table_p1.pdf,6,6,100,
 docling,01_basic.docx,8,8,100,
 docling,01_basic.pdf,8,8,100,
 docling,02_table.docx,9,9,100,
@@ -27,6 +30,9 @@ docling,06_header_footer.pdf,5,5,100,
 docling,07_scanned.pdf,6,6,100,
 docling,14_scan_tilted.pdf,6,6,100,
 docling,15_scan_lowres.pdf,6,6,100,
+docling,21_irs_w9_p1.pdf,6,6,100,
+docling,23_cdc_mmwr_p1-3.pdf,7,7,100,
+docling,24_cdc_table_p1.pdf,6,6,100,
 pymupdf4llm,01_basic.pdf,8,8,100,
 pymupdf4llm,02_table.pdf,9,9,100,
 pymupdf4llm,03_two_column.pdf,9,9,100,
@@ -35,3 +41,6 @@ pymupdf4llm,06_header_footer.pdf,5,5,100,
 pymupdf4llm,07_scanned.pdf,5,6,83,Annual Summary 2026
 pymupdf4llm,14_scan_tilted.pdf,6,6,100,
 pymupdf4llm,15_scan_lowres.pdf,6,6,100,
+pymupdf4llm,21_irs_w9_p1.pdf,2,6,33,Request for Taxpayer Identification Number and Certification; Give form to the requester. Do not send to the IRS.; Print or type; Taxpayer Identification Number (TIN)
+pymupdf4llm,23_cdc_mmwr_p1-3.pdf,7,7,100,
+pymupdf4llm,24_cdc_table_p1.pdf,6,6,100,

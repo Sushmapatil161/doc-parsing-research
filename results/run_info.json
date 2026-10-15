@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-15T12:29:22",
+  "date": "2026-10-15T13:57:24",
   "python": "3.10.3",
   "os": "Windows-10-10.0.22631-SP0",
   "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
@@ -24,7 +24,12 @@
     "06_header_footer.pdf",
     "07_scanned.pdf",
     "14_scan_tilted.pdf",
-    "15_scan_lowres.pdf"
+    "15_scan_lowres.pdf",
+    "21_irs_w9_p1.pdf",
+    "22_irs_1040_p1.pdf",
+    "23_cdc_mmwr_p1-3.pdf",
+    "24_cdc_table_p1.pdf",
+    "25_nasa_scan.pdf"
   ],
   "notes": "Each run is a fresh process. first_s includes lazy model loading; warm_s is a second conversion in the same process. Default settings for every tool."
 }
