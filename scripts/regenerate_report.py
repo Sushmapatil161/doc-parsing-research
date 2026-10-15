@@ -10,7 +10,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 STEPS = [
+    "check_text_layer.py",    # real text or image-only? -> results/text_layer.csv
     "check_facts.py",         # facts found       -> results/facts.csv
+    "count_noocr_facts.py",   # OCR on/off facts  -> results/noocr_facts.csv
     "score_tables.py",        # table cells       -> results/table_scores.csv
     "reading_order.py",       # reading order     -> results/reading_order.csv
     "make_headline.py",       # headline numbers  -> top of docs/report.md
