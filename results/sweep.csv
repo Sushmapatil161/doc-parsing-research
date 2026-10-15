@@ -1,0 +1,41 @@
+engine,kind,level,file,found,total,chars,seconds,status,missing
+docling_rapidocr,tilt,0,tilt_00.pdf,5,6,137,17.22,ok,Annual Summary 2026
+docling_rapidocr,tilt,4,tilt_04.pdf,6,6,140,3.83,ok,
+docling_rapidocr,tilt,8,tilt_08.pdf,6,6,139,4.14,ok,
+docling_rapidocr,tilt,12,tilt_12.pdf,0,6,14,3.21,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr,tilt,20,tilt_20.pdf,0,6,14,3.01,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr,dpi,150,dpi_150.pdf,6,6,139,3.79,ok,
+docling_rapidocr,dpi,100,dpi_100.pdf,6,6,139,4.49,ok,
+docling_rapidocr,dpi,72,dpi_072.pdf,6,6,139,4.58,ok,
+docling_rapidocr,dpi,50,dpi_050.pdf,6,6,139,3.45,ok,
+docling_rapidocr,dpi,36,dpi_036.pdf,0,6,14,3.12,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr_fullpage,tilt,0,tilt_00.pdf,5,6,137,7.88,ok,Annual Summary 2026
+docling_rapidocr_fullpage,tilt,4,tilt_04.pdf,6,6,140,5.82,ok,
+docling_rapidocr_fullpage,tilt,8,tilt_08.pdf,6,6,139,6.31,ok,
+docling_rapidocr_fullpage,tilt,12,tilt_12.pdf,0,6,14,6.98,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr_fullpage,tilt,20,tilt_20.pdf,0,6,14,7.11,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_rapidocr_fullpage,dpi,150,dpi_150.pdf,5,6,137,5.28,ok,Annual Summary 2026
+docling_rapidocr_fullpage,dpi,100,dpi_100.pdf,6,6,139,4.84,ok,
+docling_rapidocr_fullpage,dpi,72,dpi_072.pdf,5,6,138,4.46,ok,Annual Summary 2026
+docling_rapidocr_fullpage,dpi,50,dpi_050.pdf,5,6,138,4.59,ok,Annual Summary 2026
+docling_rapidocr_fullpage,dpi,36,dpi_036.pdf,0,6,14,4.33,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_easyocr,tilt,0,tilt_00.pdf,4,6,93,14.87,ok,"Kestrel Systems; 9,84,000"
+docling_easyocr,tilt,4,tilt_04.pdf,5,6,136,5.07,ok,"9,84,000"
+docling_easyocr,tilt,8,tilt_08.pdf,3,6,140,7.01,ok,Annual Summary 2026; Kestrel Systems; 5 May 2026
+docling_easyocr,tilt,12,tilt_12.pdf,0,6,24,7.39,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_easyocr,tilt,20,tilt_20.pdf,0,6,14,6.82,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+docling_easyocr,dpi,150,dpi_150.pdf,6,6,140,4.75,ok,
+docling_easyocr,dpi,100,dpi_100.pdf,5,6,138,4.54,ok,5 May 2026
+docling_easyocr,dpi,72,dpi_072.pdf,6,6,139,4.29,ok,
+docling_easyocr,dpi,50,dpi_050.pdf,2,6,65,4.33,ok,"Kestrel Systems; 9,84,000; 5 May 2026; SCN-3309"
+docling_easyocr,dpi,36,dpi_036.pdf,0,6,14,4.87,ok,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+pymupdf4llm,tilt,0,tilt_00.pdf,5,6,138,4.01,ok,Annual Summary 2026
+pymupdf4llm,tilt,4,tilt_04.pdf,6,6,139,2.49,ok,
+pymupdf4llm,tilt,8,tilt_08.pdf,6,6,138,2.73,ok,
+pymupdf4llm,tilt,12,tilt_12.pdf,6,6,139,3.67,ok,
+pymupdf4llm,tilt,20,tilt_20.pdf,6,6,138,3.22,ok,
+pymupdf4llm,dpi,150,dpi_150.pdf,5,6,137,1.94,ok,Annual Summary 2026
+pymupdf4llm,dpi,100,dpi_100.pdf,6,6,139,1.9,ok,
+pymupdf4llm,dpi,72,dpi_072.pdf,6,6,139,2.04,ok,
+pymupdf4llm,dpi,50,dpi_050.pdf,6,6,139,1.96,ok,
+pymupdf4llm,dpi,36,dpi_036.pdf,6,6,139,1.83,ok,
