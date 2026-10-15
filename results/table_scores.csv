@@ -1,7 +1,7 @@
 tool,file,table,tables_in_output,header_ok,header_total,body_ok,body_total,cells_ok,cells_total,percent,extra_rows
 markitdown,02_table.docx,02_table.csv,1,0,4,12,12,12,16,75,2
 docling,02_table.docx,02_table.csv,1,2,4,12,12,14,16,88,1
-markitdown,02_table.pdf,02_table.csv,1,2,4,12,12,14,16,88,2
+markitdown,02_table.pdf,02_table.csv,1,2,4,12,12,14,16,88,1
 pymupdf4llm,02_table.pdf,02_table.csv,1,1,4,12,12,13,16,81,1
 docling,02_table.pdf,02_table.csv,1,3,4,12,12,15,16,94,0
 markitdown,04_slides.pptx,04_slides.csv,1,3,3,9,9,12,12,100,0

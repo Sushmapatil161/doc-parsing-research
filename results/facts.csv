@@ -11,6 +11,8 @@ markitdown,05_sheet.xlsx,7,7,100,
 markitdown,06_header_footer.docx,5,5,100,
 markitdown,06_header_footer.pdf,5,5,100,
 markitdown,07_scanned.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+markitdown,14_scan_tilted.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
+markitdown,15_scan_lowres.pdf,0,6,0,"Annual Summary 2026; Kestrel Systems; 9,84,000; Coimbatore; 5 May 2026; SCN-3309"
 docling,01_basic.docx,8,8,100,
 docling,01_basic.pdf,8,8,100,
 docling,02_table.docx,9,9,100,
@@ -23,9 +25,13 @@ docling,05_sheet.xlsx,7,7,100,
 docling,06_header_footer.docx,5,5,100,
 docling,06_header_footer.pdf,5,5,100,
 docling,07_scanned.pdf,6,6,100,
+docling,14_scan_tilted.pdf,6,6,100,
+docling,15_scan_lowres.pdf,6,6,100,
 pymupdf4llm,01_basic.pdf,8,8,100,
 pymupdf4llm,02_table.pdf,9,9,100,
 pymupdf4llm,03_two_column.pdf,9,9,100,
 pymupdf4llm,04_slides.pdf,8,8,100,
 pymupdf4llm,06_header_footer.pdf,5,5,100,
 pymupdf4llm,07_scanned.pdf,5,6,83,Annual Summary 2026
+pymupdf4llm,14_scan_tilted.pdf,6,6,100,
+pymupdf4llm,15_scan_lowres.pdf,6,6,100,
